@@ -9,7 +9,6 @@ public class PotionManager : MonoBehaviour
     
     public Potion potionInPot;
     
-    // Start is called before the first frame update
     void Start()
     {
         if(potionInPot == null)
@@ -18,7 +17,6 @@ public class PotionManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(materials.Count == 3)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9006488476975309871}
   - component: {fileID: 9006488476975309870}
   - component: {fileID: 39844807759906727}
+  - component: {fileID: -145376413099534017}
   m_Layer: 0
   m_Name: Nullifying Powder
   m_TagString: Nullifying Powder
@@ -111,3 +112,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-145376413099534017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006488476975309873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d216e30864af9242ac389c9f6af1516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTouchable: 1
+  isTouched: 0
+  wasTouched: 0
+  puppetHandTouching: {fileID: 0}
+  touchEvents:
+    touch:
+      m_PersistentCalls:
+        m_Calls: []
+    untouch:
+      m_PersistentCalls:
+        m_Calls: []
+  rigidbody: {fileID: 0}
+  grabStyle: 1
+  isGrabbed: 0
+  isGrabbable: 1
+  isThrowable: 0
+  grabBreakforce: Infinity
+  attach: {fileID: 0}
+  puppetHandsGrabbing: []
+  originalParent: {fileID: 0}
+  grabEvents:
+    grabbed:
+      m_PersistentCalls:
+        m_Calls: []
+    released:
+      m_PersistentCalls:
+        m_Calls: []
+  hasRigidBodyAtStart: 0

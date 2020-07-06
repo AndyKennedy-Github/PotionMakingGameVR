@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6025387695563640731}
   - component: {fileID: 6025387695563640730}
   - component: {fileID: 1569700308}
+  - component: {fileID: -3431762271351692574}
   m_Layer: 0
   m_Name: Tail
   m_TagString: Ingredient
@@ -124,3 +125,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-3431762271351692574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6025387695563640733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d216e30864af9242ac389c9f6af1516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTouchable: 1
+  isTouched: 0
+  wasTouched: 0
+  puppetHandTouching: {fileID: 0}
+  touchEvents:
+    touch:
+      m_PersistentCalls:
+        m_Calls: []
+    untouch:
+      m_PersistentCalls:
+        m_Calls: []
+  rigidbody: {fileID: 0}
+  grabStyle: 1
+  isGrabbed: 0
+  isGrabbable: 1
+  isThrowable: 0
+  grabBreakforce: Infinity
+  attach: {fileID: 0}
+  puppetHandsGrabbing: []
+  originalParent: {fileID: 0}
+  grabEvents:
+    grabbed:
+      m_PersistentCalls:
+        m_Calls: []
+    released:
+      m_PersistentCalls:
+        m_Calls: []
+  hasRigidBodyAtStart: 0
