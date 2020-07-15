@@ -21,12 +21,6 @@ public class Ingredient : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetMatName(string s)
     {
         matName = s;

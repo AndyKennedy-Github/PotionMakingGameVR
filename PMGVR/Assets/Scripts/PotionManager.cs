@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PotionManager : MonoBehaviour
 {
-
-    public List<Ingredient> materials;
-
     public Potion potionInPot;
 
     void Start()
@@ -15,31 +12,16 @@ public class PotionManager : MonoBehaviour
         {
             potionInPot = FindObjectOfType<Potion>();
         }
+        RevertPotion();
     }
 
     void Update()
     {
-        if (materials.Count == 3)
+        if(potionInPot != null)
         {
-            MakePotion(materials[0].matName, materials[1].matName, materials[2].matName);
+            Debug.Log(potionInPot.GetPotionName());
         }
-    }
 
-    void MakePotion(string one, string two, string three)
-    {
-        /*
-        if (one == "Eyeball" && two == "Tail" || one == "Tail" && two == "Eyeball")
-        {
-            potionInPot.SetPotionName("Melty Sad Boi");
-            potionInPot.SetPotionColor("Blue");
-            potionInPot.SetPotionProperty("Acidic");
-            Debug.Log("I made a potion! It's a " + potionInPot.GetPotionName() + "!");
-        }
-        else
-        {
-            materials.Clear();
-        }
-        */
     }
 
     void RevertPotion()
@@ -47,7 +29,8 @@ public class PotionManager : MonoBehaviour
         potionInPot.SetPotionName("NULL");
         potionInPot.SetPotionColor("NULL");
         potionInPot.SetPotionProperty("NULL");
-        materials.Clear();
+        potionInPot.SetPotionColorIntensity(0);
+        potionInPot.SetPotionProperyIntensity(0);
     }
 
     void AddIngredientToPotion(GameObject g)
@@ -60,6 +43,10 @@ public class PotionManager : MonoBehaviour
                 potionInPot.SetPotionColorIntensity(potionInPot.GetPotionColorIntensity() + g.GetComponent<Ingredient>().GetIntensity());
             }
         }
+        else if(potionInPot.GetPotionColor().ToString() != g.GetComponent<Ingredient>().GetIngredientColor().ToString())
+        {
+            CreateColorCombo(g);
+        }
 
         if(g.GetComponent<Ingredient>().GetIngredientProperty() != Ingredient.Property.Null  || g.GetComponent<Ingredient>().GetIngredientProperty().ToString() == potionInPot.GetPotionProperty().ToString())
         {
@@ -71,17 +58,54 @@ public class PotionManager : MonoBehaviour
         }
     }
 
+    void CreateColorCombo(GameObject g)
+    {
+        if(potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
+        { 
+            potionInPot.SetPotionColor("Purple");
+            potionInPot.SetPotionColorIntensity(2);
+        }
+        if (potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+        {
+            potionInPot.SetPotionColor("Green");
+            potionInPot.SetPotionColorIntensity(2);
+        }
+        if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
+        {
+            potionInPot.SetPotionColor("Purple");
+            potionInPot.SetPotionColorIntensity(2);
+        }
+        if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+        {
+            potionInPot.SetPotionColor("Orange");
+            potionInPot.SetPotionColorIntensity(2);
+        }
+        if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
+        {
+            potionInPot.SetPotionColor("Green");
+            potionInPot.SetPotionColorIntensity(2);
+        }
+        if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
+        {
+            potionInPot.SetPotionColor("Orange");
+            potionInPot.SetPotionColorIntensity(2);
+        }
+        if(potionInPot.GetPotionColor() == Potion.Color.Orange || potionInPot.GetPotionColor() == Potion.Color.Purple || potionInPot.GetPotionColor() == Potion.Color.Green && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+        {
+            potionInPot.SetPotionColor("Brown");
+            potionInPot.SetPotionColorIntensity(3);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ingredient" && materials.Count < 2)
+        if(other.tag == "Ingredient")
         {
-            /*materials.Add(other.gameObject.transform.GetComponent<Ingredient>());
-            Debug.Log("I got a material! It's name is: " + other.gameObject.transform.GetComponent<Ingredient>().GetMatName());
-            */
             AddIngredientToPotion(other.gameObject);
+            Destroy(other.gameObject);
         }
         
-        if(other.tag == "Bottle" && materials.Count == 2)
+        if(other.tag == "Bottle")
         {
             other.gameObject.transform.GetComponent<Bottle>().potionToPull = potionInPot;
             other.gameObject.transform.GetComponent<Bottle>().AddPotion();
@@ -90,6 +114,7 @@ public class PotionManager : MonoBehaviour
         if(other.tag == "Nullifying Powder")
         {
             RevertPotion();
+            Destroy(other.gameObject);
         }
     }
 }

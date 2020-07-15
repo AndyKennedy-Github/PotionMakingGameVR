@@ -7,7 +7,7 @@ public class Potion : MonoBehaviour
     private string potionName, colorAdj, color, propAdj, prop;
     int colorIntensity;
     int propertyIntensity;
-    public enum Color { Blue, Red, Yellow, Purple, Green, Orange, Null };
+    public enum Color { Blue, Red, Yellow, Purple, Green, Orange, Brown, Null };
     public enum Property { Acidic, Explosive, Freezing, Flammable, Null };
 
     Color myColor = Color.Null;
@@ -22,12 +22,6 @@ public class Potion : MonoBehaviour
         {
             potionName = "NULL";
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void SetPotionName(string s)
@@ -57,6 +51,9 @@ public class Potion : MonoBehaviour
             case "Orange":
                 myColor = Color.Orange;
                 break;
+            case "Brown":
+                myColor = Color.Brown;
+                break;
             case "Null":
                 break;
         }
@@ -83,6 +80,9 @@ public class Potion : MonoBehaviour
                 break;
             case Color.Orange:
                 myColor = Color.Orange;
+                break;
+            case Color.Brown:
+                myColor = Color.Brown;
                 break;
             case Color.Null:
                 break;
@@ -155,6 +155,8 @@ public class Potion : MonoBehaviour
     {
         switch (GetPotionColorIntensity())
         {
+            case 0:
+                break;
             case 1:
                 colorAdj = "Light ";
                 break;
@@ -191,6 +193,8 @@ public class Potion : MonoBehaviour
         }
         switch(GetPotionProperyIntensity())
         {
+            case 0:
+                break;
             case 1:
                 propAdj = "Weak ";
                 break;
@@ -204,19 +208,19 @@ public class Potion : MonoBehaviour
         switch(GetPotionProperty())
         {
             case Property.Acidic:
-                prop = "Acidic";
+                prop = "Acidic ";
                 break;
             case Property.Explosive:
-                prop = "Explosive";
+                prop = "Explosive ";
                 break;
             case Property.Freezing:
-                prop = "Freezing";
+                prop = "Freezing ";
                 break;
             case Property.Flammable:
-                prop = "Flamable";
+                prop = "Flamable ";
                 break;
             case Property.Null:
-                prop = "Effectless";
+                prop = "Effectless ";
                 break;
         }
         return colorAdj + color + propAdj + prop;
