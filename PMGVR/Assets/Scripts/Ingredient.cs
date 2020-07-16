@@ -6,18 +6,19 @@ public class Ingredient : MonoBehaviour
 {
     // Start is called before the first frame update
     public string matName;
+    public int intensity;
+    public enum Color { Blue, Red, Yellow, Purple, Green, Orange, Null };
+    public enum Property { Acidic, Explosive, Freezing, Flammable, Null };
+
+    public Color myColor = Color.Null;
+
+    public Property myProperty = Property.Null;
     void Start()
     {
         if(matName == null)
         {
             matName = "NULL";
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetMatName(string s)
@@ -28,5 +29,20 @@ public class Ingredient : MonoBehaviour
     public string GetMatName()
     {
         return matName;
+    }
+
+    public Color GetIngredientColor()
+    {
+        return myColor;
+    }
+
+    public Property GetIngredientProperty()
+    {
+        return myProperty;
+    }
+
+    public int GetIntensity()
+    {
+        return intensity;
     }
 }
