@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
-    private string potionName;
-    public enum Color { Blue, Red, Yellow, Purple, Green, Orange, Null };
+    private string potionName, colorAdj, color, propAdj, prop;
+    int colorIntensity;
+    int propertyIntensity;
+    public enum Color { Blue, Red, Yellow, Purple, Green, Orange, Brown, Null };
     public enum Property { Acidic, Explosive, Freezing, Flammable, Null };
 
     Color myColor = Color.Null;
@@ -20,12 +22,6 @@ public class Potion : MonoBehaviour
         {
             potionName = "NULL";
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void SetPotionName(string s)
@@ -55,6 +51,9 @@ public class Potion : MonoBehaviour
             case "Orange":
                 myColor = Color.Orange;
                 break;
+            case "Brown":
+                myColor = Color.Brown;
+                break;
             case "Null":
                 break;
         }
@@ -82,6 +81,9 @@ public class Potion : MonoBehaviour
             case Color.Orange:
                 myColor = Color.Orange;
                 break;
+            case Color.Brown:
+                myColor = Color.Brown;
+                break;
             case Color.Null:
                 break;
         }
@@ -108,6 +110,26 @@ public class Potion : MonoBehaviour
         }
     }
 
+    public void SetPotionProperyIntensity(int i)
+    {
+        propertyIntensity = i;
+    }
+
+    public void SetPotionColorIntensity(int i)
+    {
+        colorIntensity = i;
+    }
+
+    public int GetPotionProperyIntensity()
+    {
+        return propertyIntensity;
+    }
+
+    public int GetPotionColorIntensity()
+    {
+        return colorIntensity;
+    }
+
     public void SetPotionProperty(Property p)
     {
         switch (p)
@@ -131,7 +153,77 @@ public class Potion : MonoBehaviour
 
     public string GetPotionName()
     {
-        return potionName;
+        switch (GetPotionColorIntensity())
+        {
+            case 0:
+                break;
+            case 1:
+                colorAdj = "Light ";
+                break;
+            case 2:
+                colorAdj = "Medium ";
+                break;
+            case 3:
+                colorAdj = "Deep ";
+                break;
+        }
+        switch(GetPotionColor())
+        {
+            case Color.Blue:
+                color = "Blue ";
+                break;
+            case Color.Red:
+                color = "Red ";
+                break;
+            case Color.Yellow:
+                color = "Yellow ";
+                break;
+            case Color.Purple:
+                color = "Purple ";
+                break;
+            case Color.Green:
+                color = "Green ";
+                break;
+            case Color.Orange:
+                color = "Orange ";
+                break;
+            case Color.Null:
+                color = "Clear ";
+                break;
+        }
+        switch(GetPotionProperyIntensity())
+        {
+            case 0:
+                break;
+            case 1:
+                propAdj = "Weak ";
+                break;
+            case 2:
+                propAdj = "Moderate ";
+                break;
+            case 3:
+                propAdj = "Strong ";
+                break;
+        }
+        switch(GetPotionProperty())
+        {
+            case Property.Acidic:
+                prop = "Acidic ";
+                break;
+            case Property.Explosive:
+                prop = "Explosive ";
+                break;
+            case Property.Freezing:
+                prop = "Freezing ";
+                break;
+            case Property.Flammable:
+                prop = "Flamable ";
+                break;
+            case Property.Null:
+                prop = "Effectless ";
+                break;
+        }
+        return colorAdj + color + propAdj + prop;
     }
 
     public Color GetPotionColor()

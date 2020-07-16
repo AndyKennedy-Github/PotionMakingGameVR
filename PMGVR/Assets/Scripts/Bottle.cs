@@ -25,6 +25,8 @@ public class Bottle : MonoBehaviour
         potionInBottle.SetPotionName(potionToPull.GetPotionName());
         potionInBottle.SetPotionColor(potionToPull.GetPotionColor());
         potionInBottle.SetPotionProperty(potionToPull.GetPotionProperty());
+        potionInBottle.SetPotionColorIntensity(potionToPull.GetPotionColorIntensity());
+        potionInBottle.SetPotionProperyIntensity(potionToPull.GetPotionProperyIntensity());
         Debug.Log("I have a potion in me! It's name is " + potionInBottle.GetPotionName() + "!");
     }
 
