@@ -5,9 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    private Timer t;
 
     int totalGameGold, levelGold, levelGoldGoal, totalGameStars, levelStars;
     int firstStarGoal, secondStarGoal, thirdStarGoal;
+    public int breathingTime = 5;
 
     public bool inLevel, inMap, levelEnded;
 
@@ -27,7 +29,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        t = FindObjectOfType<Timer>();
+        StartCoroutine(LevelStart(breathingTime));
     }
 
     // Update is called once per frame
@@ -38,13 +41,11 @@ public class GameManager : MonoBehaviour
             StarCount();
         }
 
-        /*if(levelEnded == false)
-         {
+        if(levelEnded == true)
+        {
             EndOfLevel();
-            levelEnded = true;
-         }
-         */
-        
+            levelEnded = false;
+        }
     }
 
     public void ResetLevelGoldandStars()
@@ -75,6 +76,12 @@ public class GameManager : MonoBehaviour
             //display third star achieved!
             levelStars = 3;
         }
+    }
+
+    IEnumerator LevelStart(int i)
+    {
+        yield return new WaitForSecondsRealtime(i);
+        t.startTime = true;
     }
 
     IEnumerator EndOfLevel()
