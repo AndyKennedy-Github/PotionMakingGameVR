@@ -45,6 +45,15 @@ public class GameManager : MonoBehaviour
             EndOfLevel();
             levelEnded = false;
         }
+
+        /*
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            SetGoldGoal(1000);
+            SceneManager.LoadScene(1);
+            Debug.Log(levelGoldGoal);
+        }
+        */
     }
 
     public void ResetLevelGoldandStars()
@@ -60,6 +69,7 @@ public class GameManager : MonoBehaviour
             //display first star achieved!
             //Set up an animation to play here
             levelStars = 1;
+            Debug.Log("You reached the first star goal!");
         }
         else if(levelGold > secondStarGoal)
         {
