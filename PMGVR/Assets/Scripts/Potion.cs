@@ -55,6 +55,7 @@ public class Potion : MonoBehaviour
                 myColor = Color.Brown;
                 break;
             case "Null":
+                myColor = Color.Null;
                 break;
         }
     }
@@ -85,6 +86,7 @@ public class Potion : MonoBehaviour
                 myColor = Color.Brown;
                 break;
             case Color.Null:
+                myColor = Color.Null;
                 break;
         }
     }
@@ -106,6 +108,7 @@ public class Potion : MonoBehaviour
                 myProperty = Property.Flammable;
                 break;
             case "Null":
+                myProperty = Property.Null;
                 break;
         }
     }
@@ -147,6 +150,7 @@ public class Potion : MonoBehaviour
                 myProperty = Property.Flammable;
                 break;
             case Property.Null:
+                myProperty = Property.Null;
                 break;
         }
     }

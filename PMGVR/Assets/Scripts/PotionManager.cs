@@ -26,11 +26,13 @@ public class PotionManager : MonoBehaviour
 
     void RevertPotion()
     {
-        potionInPot.SetPotionName("NULL");
-        potionInPot.SetPotionColor("NULL");
-        potionInPot.SetPotionProperty("NULL");
-        potionInPot.SetPotionColorIntensity(0);
-        potionInPot.SetPotionProperyIntensity(0);
+        if(potionInPot != null)
+        {
+            potionInPot.SetPotionColor("Null");
+            potionInPot.SetPotionProperty("Null");
+            potionInPot.SetPotionColorIntensity(0);
+            potionInPot.SetPotionProperyIntensity(0);
+        }
     }
 
     void AddIngredientToPotion(GameObject g)

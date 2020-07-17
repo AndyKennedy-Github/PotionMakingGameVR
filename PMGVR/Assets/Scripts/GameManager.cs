@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,14 +27,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         t = FindObjectOfType<Timer>();
         StartCoroutine(LevelStart(breathingTime));
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(inLevel)
@@ -54,28 +53,43 @@ public class GameManager : MonoBehaviour
         levelStars = 0;
     }
 
-    public void SetLevelGoal(int i)
-    {
-        levelGoldGoal = i;
-    }
-
     void StarCount()
     {
         if(levelGold > firstStarGoal)
         {
             //display first star achieved!
+            //Set up an animation to play here
             levelStars = 1;
         }
         else if(levelGold > secondStarGoal)
         {
             //display second star achieved!
+            //Set up an animation to play here
             levelStars = 2;
         }
         else if(levelGold > thirdStarGoal)
         {
             //display third star achieved!
+            //Set up an animation to play here
             levelStars = 3;
         }
+    }
+
+    public void AddGold(int i)
+    {
+        levelGold += i;
+    }
+
+    public void SetGoldGoal(int i)
+    {
+        levelGoldGoal = i;
+    }
+
+    public void SetStarGoals(int a, int b, int c)
+    {
+        firstStarGoal = a;
+        secondStarGoal = b;
+        thirdStarGoal = c;
     }
 
     IEnumerator LevelStart(int i)
