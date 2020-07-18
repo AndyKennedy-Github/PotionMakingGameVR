@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer instance;
     public float timeInRound = 120;
     public bool startTime;
+    private GameManager gm;
+
     // Start is called before the first frame update
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         startTime = false;
     }
 
@@ -20,7 +36,8 @@ public class Timer : MonoBehaviour
             timeInRound -= Time.deltaTime;
             if (timeInRound < 0)
             {
-                return;
+                gm.levelEnded = true;
+                startTime = false;
             }
         }
     }
