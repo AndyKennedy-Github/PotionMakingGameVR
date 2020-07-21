@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PMGVR 1.unity
+    guid: 65d00bab7c90db64e9b1444d23d42d0a
+  - enabled: 1
+    path: Assets/Scenes/Test.unity
+    guid: 79bafc287ebcac048ae4a40ee41498cc
   m_configObjects: {}

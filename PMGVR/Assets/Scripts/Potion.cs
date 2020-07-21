@@ -7,8 +7,8 @@ public class Potion : MonoBehaviour
     private string potionName, colorAdj, color, propAdj, prop;
     int colorIntensity;
     int propertyIntensity;
-    public enum Color { Blue, Red, Yellow, Purple, Green, Orange, Brown, Null };
-    public enum Property { Acidic, Explosive, Freezing, Flammable, Null };
+    public enum Color {Blue, Red, Yellow, Purple, Green, Orange, Brown, Null};
+    public enum Property {Acidic, Explosive, Freezing, Flammable, Null};
 
     Color myColor = Color.Null;
 
