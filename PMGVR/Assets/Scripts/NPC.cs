@@ -1,23 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPC : Potion
 {
-    int myColorIntensity, myPropertyIntensity, randomLevelNumber, randomPotionNumber;
-    bool beingServed, potionObtained;
+    int myColorIntensity, myPropertyIntensity, randomLevelNumber, randomPotionNumber, prevNPC, spotInList;
+    public bool beingServed, potionObtained;
     GameManager gm;
+    NPCManager npcgm;
+    public Transform windowSpot, endSpot;
+    NavMeshAgent agent;
 
-    Color myColor = Color.Null;
+    Color wantedColor = Color.Null;
 
-    Property myProperty = Property.Null;
+    Property wantedProperty = Property.Null;
 
     // Start is called before the first frame update
     void Start()
     {
         beingServed = false;
         potionObtained = false;
+        npcgm = FindObjectOfType<NPCManager>();
         gm = FindObjectOfType<GameManager>();
+        agent = GetComponent<NavMeshAgent>();
         randomLevelNumber = Random.Range(0, 99);
         randomPotionNumber = Random.Range(0, 99);
         SetDesiredPotion(gm.GetLevelDifficulty());
@@ -26,20 +32,36 @@ public class NPC : Potion
     // Update is called once per frame
     void Update()
     {
+        if (npcgm.npcs[0] == this || npcgm.npcs[FindPreviousNPC()].potionObtained)
+        {
+            beingServed = true;
+        }
         if (!beingServed && !potionObtained)
         {
+            agent.destination = new Vector3(npcgm.npcs[FindPreviousNPC()].transform.position.x, npcgm.npcs[FindPreviousNPC()].transform.position.y, npcgm.npcs[FindPreviousNPC()].transform.position.z - 2.0f);
+            Debug.Log(FindPreviousNPC());
             //Have the character stand in a spot and stay there.
         }
         else if (beingServed && !potionObtained)
         {
+            agent.destination = new Vector3(.4f, transform.position.y, -4.2f);//windowSpot.position;
+            Debug.Log("I'm moving to the window!");
             //Move to new spot and stay there. Probs passing through a trigger
             //that shows what thing they want on the screen
         }
         else if(potionObtained)
         {
+            agent.destination = endSpot.position;
+            beingServed = false;
             //Moves off screen (probs around carriage) and then despawning
             //Also transfers beingserved to next character in line
         }
+    }
+
+    int FindPreviousNPC()
+    {
+        prevNPC = npcgm.GetSpotInList(this) - 1;
+        return prevNPC;
     }
     
     void SetDesiredPotion(int i)
@@ -122,18 +144,18 @@ public class NPC : Potion
     {
         if(randomPotionNumber <= 49)
         {
-            myProperty = Property.Null;
-            myColor = (Color)Random.Range(0, 2);
-            if(myColor.ToString() != "Null")
+            wantedProperty = Property.Null;
+            wantedColor = (Color)Random.Range(0, 2);
+            if(wantedColor.ToString() != "Null")
             {
                 myColorIntensity = 1;
             }
         }
         else if(randomPotionNumber > 50)
         {
-            myColor = Color.Null;
-            myProperty = (Property)Random.Range(0, 4);
-            if(myProperty.ToString() != "Null")
+            wantedColor = Color.Null;
+            wantedProperty = (Property)Random.Range(0, 4);
+            if(wantedProperty.ToString() != "Null")
             {
                 myPropertyIntensity = 1;
             }
@@ -142,22 +164,22 @@ public class NPC : Potion
 
     void MakeMediumPotion()
     {
-        myColor = (Color)Random.Range(0, 5);
-        myProperty = (Property)Random.Range(0, 4);
-        if (myColor.ToString() == "Null")
+        wantedColor = (Color)Random.Range(0, 5);
+        wantedProperty = (Property)Random.Range(0, 4);
+        if (wantedColor.ToString() == "Null")
         {
             myColorIntensity = 0;
         }
-        else if(myColor.ToString() == "Yellow" || myColor.ToString() == "Red" || myColor.ToString() == "Blue")
+        else if(wantedColor.ToString() == "Yellow" || wantedColor.ToString() == "Red" || wantedColor.ToString() == "Blue")
         {
             myColorIntensity = Random.Range(1, 2);
         }
-        else if(myColor.ToString() == "Purple" || myColor.ToString() == "Orange" || myColor.ToString() == "Green")
+        else if(wantedColor.ToString() == "Purple" || wantedColor.ToString() == "Orange" || wantedColor.ToString() == "Green")
         {
             myColorIntensity = 2;
         }
 
-        if (myProperty.ToString() != "Null")
+        if (wantedProperty.ToString() != "Null")
         {
             myPropertyIntensity = Random.Range(1,2);
         }
@@ -165,17 +187,17 @@ public class NPC : Potion
 
     void MakeHardPotion()
     {
-        myColor = (Color)Random.Range(0, 6);
-        myProperty = (Property)Random.Range(0, 3);
-        if (myColor.ToString() == "Yellow" || myColor.ToString() == "Red" || myColor.ToString() == "Blue")
+        wantedColor = (Color)Random.Range(0, 6);
+        wantedProperty = (Property)Random.Range(0, 3);
+        if (wantedColor.ToString() == "Yellow" || wantedColor.ToString() == "Red" || wantedColor.ToString() == "Blue")
         {
             myColorIntensity = Random.Range(2, 3);
         }
-        else if (myColor.ToString() == "Purple" || myColor.ToString() == "Orange" || myColor.ToString() == "Green")
+        else if (wantedColor.ToString() == "Purple" || wantedColor.ToString() == "Orange" || wantedColor.ToString() == "Green")
         {
             myColorIntensity = 2;
         }
-        else if(myColor.ToString() == "Brown")
+        else if(wantedColor.ToString() == "Brown")
         {
             myColorIntensity = 3;
         }
@@ -184,8 +206,8 @@ public class NPC : Potion
 
     void MakeExpertPotion()
     {
-        myColor = Color.Brown;
-        myProperty = (Property)Random.Range(0, 3);
+        wantedColor = Color.Brown;
+        wantedProperty = (Property)Random.Range(0, 3);
         myPropertyIntensity = 3;
     }
 }
