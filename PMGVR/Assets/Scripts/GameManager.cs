@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
             levelEnded = false;
         }
 
+        Debug.Log(levelGold);
         /*
         if(Input.GetKeyDown(KeyCode.Space))
         {

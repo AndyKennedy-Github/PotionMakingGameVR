@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &927954974538438856
+--- !u!1 &4041955833068861853
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,57 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2529209283615773855}
-  - component: {fileID: 8859417739345990448}
+  - component: {fileID: 4041955833068861827}
+  - component: {fileID: 4041955833068861826}
+  - component: {fileID: 4041955833068861824}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameManager 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2529209283615773855
+--- !u!4 &4041955833068861827
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927954974538438856}
+  m_GameObject: {fileID: 4041955833068861853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2490706, y: 0.9640524, z: -8.412905}
+  m_LocalPosition: {x: 0.03221877, y: 1.4084808, z: 0.58044434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8859417739345990448
+--- !u!114 &4041955833068861826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927954974538438856}
+  m_GameObject: {fileID: 4041955833068861853}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1625557459564264889406834730ca74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  breathingTime: 5
+  inLevel: 0
+  inMap: 0
+  levelEnded: 0
+--- !u!114 &4041955833068861824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041955833068861853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456a76d801e255549b1390d044197ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeInRound: 120
+  startTime: 0

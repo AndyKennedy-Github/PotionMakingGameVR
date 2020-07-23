@@ -5,10 +5,11 @@ using UnityEngine.AI;
 
 public class NPC : Potion
 {
-    int myColorIntensity, myPropertyIntensity, randomLevelNumber, randomPotionNumber, prevNPC, spotInList;
+    int myColorIntensity, myPropertyIntensity, randomLevelNumber, randomPotionNumber, prevNPC, spotInList, goldAmount;
     public bool beingServed, potionObtained;
     GameManager gm;
     NPCManager npcgm;
+    Potion myPotion;
     public Transform windowSpot, endSpot;
     NavMeshAgent agent;
 
@@ -19,6 +20,7 @@ public class NPC : Potion
     // Start is called before the first frame update
     void Start()
     {
+        myPotion = GetComponent<Potion>();
         beingServed = false;
         potionObtained = false;
         npcgm = FindObjectOfType<NPCManager>();
@@ -27,6 +29,7 @@ public class NPC : Potion
         randomLevelNumber = Random.Range(0, 99);
         randomPotionNumber = Random.Range(0, 99);
         SetDesiredPotion(gm.GetLevelDifficulty());
+        Debug.Log(GetNPCPotion());
     }
 
     // Update is called once per frame
@@ -71,14 +74,17 @@ public class NPC : Potion
             if (randomLevelNumber < 75)
             {
                 MakeEasyPotion();
+                SetGoldAmount(100);
             }
             else if (randomLevelNumber < 97 && randomLevelNumber >= 75)
             {
                 MakeMediumPotion();
+                SetGoldAmount(200);
             }
             else if (randomLevelNumber < 100 && randomLevelNumber >= 97)
             {
                 MakeHardPotion();
+                SetGoldAmount(300);
             }
         }
         else if(i == 1)
@@ -160,6 +166,10 @@ public class NPC : Potion
                 myPropertyIntensity = 1;
             }
         }
+        myPotion.SetPotionColor(wantedColor);
+        myPotion.SetPotionColorIntensity(myColorIntensity);
+        myPotion.SetPotionProperty(wantedProperty);
+        myPotion.SetPotionProperyIntensity(myPropertyIntensity);
     }
 
     void MakeMediumPotion()
@@ -183,6 +193,10 @@ public class NPC : Potion
         {
             myPropertyIntensity = Random.Range(1,2);
         }
+        myPotion.SetPotionColor(wantedColor);
+        myPotion.SetPotionColorIntensity(myColorIntensity);
+        myPotion.SetPotionProperty(wantedProperty);
+        myPotion.SetPotionProperyIntensity(myPropertyIntensity);
     }
 
     void MakeHardPotion()
@@ -202,6 +216,10 @@ public class NPC : Potion
             myColorIntensity = 3;
         }
         myPropertyIntensity = Random.Range(1, 3);
+        myPotion.SetPotionColor(wantedColor);
+        myPotion.SetPotionColorIntensity(myColorIntensity);
+        myPotion.SetPotionProperty(wantedProperty);
+        myPotion.SetPotionProperyIntensity(myPropertyIntensity);
     }
 
     void MakeExpertPotion()
@@ -209,5 +227,33 @@ public class NPC : Potion
         wantedColor = Color.Brown;
         wantedProperty = (Property)Random.Range(0, 3);
         myPropertyIntensity = 3;
+        myPotion.SetPotionColor(wantedColor);
+        myPotion.SetPotionColorIntensity(myColorIntensity);
+        myPotion.SetPotionProperty(wantedProperty);
+        myPotion.SetPotionProperyIntensity(myPropertyIntensity);
+    }
+
+    void SetGoldAmount(int i)
+    {
+        goldAmount = i;
+    }
+    
+    public string GetNPCPotion()
+    {
+        return myPotion.GetPotionName();
+    }
+
+    public void NPCServed(bool b)
+    {
+        if (b)
+        {
+            Debug.Log("I've added the money to the bank!");
+            gm.AddGold(goldAmount);
+            potionObtained = true;
+        }
+        else if(!b)
+        {
+            potionObtained = true;
+        }
     }
 }

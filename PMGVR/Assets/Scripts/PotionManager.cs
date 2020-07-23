@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PotionManager : MonoBehaviour
 {
-    public Potion potionInPot;
+    Potion potionInPot;
 
     void Start()
     {
         if (potionInPot == null)
         {
-            potionInPot = FindObjectOfType<Potion>();
+            potionInPot = GetComponentInChildren<Potion>();
         }
         RevertPotion();
     }
@@ -24,7 +24,7 @@ public class PotionManager : MonoBehaviour
 
     }
 
-    void RevertPotion()
+    public void RevertPotion()
     {
         if(potionInPot != null)
         {
@@ -33,6 +33,14 @@ public class PotionManager : MonoBehaviour
             potionInPot.SetPotionColorIntensity(0);
             potionInPot.SetPotionProperyIntensity(0);
         }
+    }
+
+    public void RevertPotion(Potion p)
+    {
+        p.SetPotionColor("Null");
+        p.SetPotionProperty("Null");
+        p.SetPotionColorIntensity(0);
+        p.SetPotionProperyIntensity(0);
     }
 
     void AddIngredientToPotion(GameObject g)

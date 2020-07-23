@@ -23,7 +23,6 @@ public class NPCManager : MonoBehaviour
 
     public void RemoveNPC(GameObject g)
     {
-        Debug.Log("I removed the knight!");
         npcs.Remove(g.GetComponent<NPC>());
         Destroy(g);
     }
@@ -38,6 +37,22 @@ public class NPCManager : MonoBehaviour
     public int GetSpotInList(NPC c)
     {
         return npcs.IndexOf(c);
+    }
+
+    public NPC GetWaitingNPC()
+    {
+        foreach(NPC npc in npcs)
+        {
+            if(npc.beingServed == true)
+            {
+                return npc;
+            }
+            else if(npc.beingServed == false)
+            {
+                return null;
+            }
+        }
+        return null;
     }
 
     IEnumerator Wait()
