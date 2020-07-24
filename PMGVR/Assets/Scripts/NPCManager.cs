@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCManager : MonoBehaviour
 {
     public GameObject npc;
+    public int npcRecharge = 3, npcMax = 5;
     public Transform startpos;
     public List<NPC> npcs = new List<NPC>();
     GameManager gm;
@@ -59,10 +60,10 @@ public class NPCManager : MonoBehaviour
     {
         while(true)
         {
-            while (npcs.Count < 5)
+            while (npcs.Count < npcMax)
             {
                 SpawnNPC();
-                yield return new WaitForSecondsRealtime(2);
+                yield return new WaitForSecondsRealtime(npcRecharge);
             }
             yield return null;
         } 
