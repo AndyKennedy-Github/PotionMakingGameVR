@@ -5,14 +5,14 @@ using UnityEngine;
 public class Potion : MonoBehaviour
 {
     private string potionName, colorAdj, color, propAdj, prop;
-    int colorIntensity;
-    int propertyIntensity;
-    public enum Color { Blue, Red, Yellow, Purple, Green, Orange, Brown, Null };
-    public enum Property { Acidic, Explosive, Freezing, Flammable, Null };
+    public int colorIntensity;
+    public int propertyIntensity;
+    public enum Color {Blue, Red, Yellow, Purple, Green, Orange, Brown, Null};
+    public enum Property {Acidic, Explosive, Freezing, Flammable, Null};
 
-    Color myColor = Color.Null;
+    public Color myColor = Color.Null;
 
-    Property myProperty = Property.Null;
+    public Property myProperty = Property.Null;
 
 
     // Start is called before the first frame update

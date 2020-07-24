@@ -30,4 +30,8 @@ public class Bottle : MonoBehaviour
         Debug.Log("I have a potion in me! It's name is " + potionInBottle.GetPotionName() + "!");
     }
 
+    public string GetPotionInBottleName()
+    {
+        return potionInBottle.GetPotionName();
+    }
 }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private Timer t;
 
-    int totalGameGold, levelGold, levelGoldGoal, totalGameStars, levelStars;
+    int totalGameGold, levelGold, levelGoldGoal, totalGameStars, levelStars, levelDif;
     int firstStarGoal, secondStarGoal, thirdStarGoal;
     public int breathingTime = 5;
 
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
             levelEnded = false;
         }
 
+        Debug.Log(levelGold);
         /*
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -100,6 +101,16 @@ public class GameManager : MonoBehaviour
         firstStarGoal = a;
         secondStarGoal = b;
         thirdStarGoal = c;
+    }
+
+    public int GetLevelDifficulty()
+    {
+        return levelDif;
+    }
+
+    public void SetLevelDifficulty(int i)
+    {
+        levelDif = i;
     }
 
     IEnumerator LevelStart(int i)
