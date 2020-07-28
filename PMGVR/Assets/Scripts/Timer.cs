@@ -34,8 +34,9 @@ public class Timer : MonoBehaviour
         if(startTime)
         {
             timeInRound -= Time.deltaTime;
-            if (timeInRound < 0)
+            if (timeInRound <= 0)
             {
+                Debug.Log("Time's up!");
                 gm.levelEnded = true;
                 startTime = false;
             }

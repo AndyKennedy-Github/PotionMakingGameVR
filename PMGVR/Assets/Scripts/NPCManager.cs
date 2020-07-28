@@ -60,7 +60,7 @@ public class NPCManager : MonoBehaviour
     {
         while(true)
         {
-            while (npcs.Count < npcMax)
+            while (npcs.Count < npcMax && gm.inLevel)
             {
                 SpawnNPC();
                 yield return new WaitForSecondsRealtime(npcRecharge);
