@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private Timer t;
     public LevelManager lm;
-    public GameObject map;
+    public Map map;
 
     public int totalGameGold, levelGold, levelGoldGoal, totalGameStars, levelStars, levelDif, level;
     public int firstStarGoal, secondStarGoal, thirdStarGoal;
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         lm = FindObjectOfType<LevelManager>();
         t = FindObjectOfType<Timer>();
+        map = FindObjectOfType<Map>();
         inLevel = false;
         isMapActive = true;
     }
@@ -52,11 +53,11 @@ public class GameManager : MonoBehaviour
 
         if(isMapActive)
         {
-            map.SetActive(true);
+            map.gameObject.SetActive(true);
         }
         else if(!isMapActive)
         {
-            map.SetActive(false);
+            map.gameObject.SetActive(false);
         }
         Debug.Log(levelGold);
         /*
@@ -81,7 +82,6 @@ public class GameManager : MonoBehaviour
             //display first star achieved!
             //Set up an animation to play here
             levelStars++; 
-            Debug.Log("You reached the first star goal!");
             lm.levels[level].firstStarGot = true;
         }
         else if(levelGold > secondStarGoal && lm.levels[level].secondStarGot == false)
@@ -155,9 +155,9 @@ public class GameManager : MonoBehaviour
             }
             lm.levels[i].firstStarGot = ES3.Load<bool>("Level " + i + " FirstStarGot");
             lm.levels[i].secondStarGot = ES3.Load<bool>("Level " + i + " SecondStarGot");
-            lm.levels[i].thirdStarGot = ES3.Load<bool>("Level " + i + " ThirdStarGot");
-            
+            lm.levels[i].thirdStarGot = ES3.Load<bool>("Level " + i + " ThirdStarGot"); 
         }
+        map.mapType = 1;
     }
 
     IEnumerator LevelStart(int i, int s)
