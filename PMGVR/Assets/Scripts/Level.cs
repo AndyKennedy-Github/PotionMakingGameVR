@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    public int levelDif, firstStarGoal, secondStarGoal, thirdStarGoal, unlockStars, totalLevelStars, level, goldHighScore, timeInLevel, starsAcquired;
+    public int levelDif, firstStarGoal, secondStarGoal, thirdStarGoal, unlockStars, /*totalLevelStars*/ level, goldHighScore, timeInLevel, starsAcquired;
 
     public bool isUnlocked = false, firstStarGot, secondStarGot, thirdStarGot;
 

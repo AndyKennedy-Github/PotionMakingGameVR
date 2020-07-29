@@ -8,12 +8,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private Timer t;
     public LevelManager lm;
+    public GameObject map;
 
     public int totalGameGold, levelGold, levelGoldGoal, totalGameStars, levelStars, levelDif, level;
     public int firstStarGoal, secondStarGoal, thirdStarGoal;
     public int breathingTime = 5;
 
-    public bool inLevel, inMap, levelEnded, goldAdded, starsAdded;
+    public bool inLevel, inMap, levelEnded, goldAdded, starsAdded, isMapActive = true;
 
     void Awake()
     {
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         lm = FindObjectOfType<LevelManager>();
         t = FindObjectOfType<Timer>();
         inLevel = false;
+        isMapActive = true;
     }
 
     void Update()
@@ -48,6 +50,14 @@ public class GameManager : MonoBehaviour
             StartCoroutine(EndOfLevel());           
         }
 
+        if(isMapActive)
+        {
+            map.SetActive(true);
+        }
+        else if(!isMapActive)
+        {
+            map.SetActive(false);
+        }
         Debug.Log(levelGold);
         /*
         if(Input.GetKeyDown(KeyCode.Space))
@@ -135,9 +145,9 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < lm.levels.Count; i++)
         {
-            if (ES3.KeyExists("Level " + i + " Stars"))
+            if (ES3.KeyExists("Level " + i + " StarsAcquired"))
             {
-                lm.levels[i].totalLevelStars = ES3.Load<int>("Level " + i + " Stars");
+                lm.levels[i].starsAcquired = ES3.Load<int>("Level " + i + " StarsAcquired");
             }
             if (ES3.KeyExists("Level " + i + " HighScore"))
             {
@@ -146,12 +156,14 @@ public class GameManager : MonoBehaviour
             lm.levels[i].firstStarGot = ES3.Load<bool>("Level " + i + " FirstStarGot");
             lm.levels[i].secondStarGot = ES3.Load<bool>("Level " + i + " SecondStarGot");
             lm.levels[i].thirdStarGot = ES3.Load<bool>("Level " + i + " ThirdStarGot");
-            lm.levels[i].starsAcquired = ES3.Load<int>("Level " + i + " StarsAcquired");
+            
         }
     }
 
     IEnumerator LevelStart(int i, int s)
     {
+        StopCoroutine("EndofLevel");
+        isMapActive = false;
         yield return new WaitForSecondsRealtime(i);
         inLevel = true;
         t.timeInRound = s;
@@ -162,6 +174,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EndOfLevel()
     {
+        StopCoroutine("LevelStart");
+        isMapActive = true;
         Debug.Log("Running the End of Level checks!");
         inLevel = false;
         if(goldAdded == false)
@@ -175,15 +189,19 @@ public class GameManager : MonoBehaviour
             lm.levels[level].starsAcquired += levelStars;
             starsAdded = true;
         }
+        if(lm.levels[level].goldHighScore < levelGold)
+        {
+            lm.levels[level].goldHighScore = levelGold;
+        }
         ResetLevelGoldandStars();
         ES3.Save("TotalGold", totalGameGold);
         ES3.Save("TotalStars", totalGameStars);
         //ES3.Save("Levels", lm.levels);
         for(int i = 0; i < lm.levels.Count; i++)
         {
-            if(lm.levels[i].totalLevelStars > 0)
+            if(lm.levels[i].starsAcquired > 0)
             {
-                ES3.Save("Level " + i + " Stars", lm.levels[i].totalLevelStars);
+                ES3.Save("Level " + i + " StarsAcquired", lm.levels[i].starsAcquired);
             }
             if(lm.levels[i].goldHighScore > 0)
             {
@@ -192,7 +210,6 @@ public class GameManager : MonoBehaviour
             ES3.Save("Level " + i + " FirstStarGot", lm.levels[level].firstStarGot);
             ES3.Save("Level " + i + " SecondStarGot", lm.levels[level].secondStarGot);
             ES3.Save("Level " + i + " ThirdStarGot", lm.levels[level].thirdStarGot);
-            ES3.Save("Level " + i + " StarsAcquired", lm.levels[level].starsAcquired);
         }
         levelEnded = true;
         yield return null;

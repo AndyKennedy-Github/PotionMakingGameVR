@@ -41,15 +41,7 @@ public class LevelManager : MonoBehaviour
             gm.secondStarGoal = l.secondStarGoal;
             gm.thirdStarGoal = l.thirdStarGoal;
             gm.StartLevel(gm.breathingTime, l.timeInLevel);
-        }
-    }
-
-    public void UpdateLevel(Level l)
-    {
-        l.totalLevelStars = gm.levelStars;
-        if(gm.levelGold > l.goldHighScore)
-        {
-            l.goldHighScore = gm.levelGold;
+            Debug.Log("The Level is loaded!");
         }
     }
 }
