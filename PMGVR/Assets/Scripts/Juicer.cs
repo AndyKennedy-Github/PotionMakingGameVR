@@ -11,6 +11,10 @@ public class Juicer : MonoBehaviour
 
     private void Start()
     {
+        if(juiced == null)
+        {
+            return;
+        }
         ingred = juiced.GetComponent<Ingredient>();
     }
     private void OnTriggerEnter(Collider other)
