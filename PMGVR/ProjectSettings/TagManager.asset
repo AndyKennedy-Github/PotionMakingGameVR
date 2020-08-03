@@ -9,6 +9,7 @@ TagManager:
   - Knight
   - Bottle
   - Wood
+  - Juiceable
   layers:
   - Default
   - TransparentFX

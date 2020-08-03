@@ -195,12 +195,13 @@ public class GameManager : MonoBehaviour
         StopCoroutine("EndofLevel");
         isMapActive = false;
         pm.RevertPotion();
-        yield return new WaitForSecondsRealtime(i);
+        pm.ClearHeat();
         inLevel = true;
         t.timeInRound = s;
         t.startTime = true;
         goldAdded = false;
         starsAdded = false;
+        yield return new WaitForSecondsRealtime(i);
     }
 
     IEnumerator EndOfLevel()

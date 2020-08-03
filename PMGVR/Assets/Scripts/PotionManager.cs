@@ -59,7 +59,7 @@ public class PotionManager : MonoBehaviour
             if(potionInPot.GetPotionColorIntensity() < 3)
             {
                 potionInPot.SetPotionColor(g.GetComponent<Ingredient>().GetIngredientColor().ToString());
-                potionInPot.SetPotionColorIntensity(potionInPot.GetPotionColorIntensity() + g.GetComponent<Ingredient>().GetIntensity());
+                potionInPot.SetPotionColorIntensity(potionInPot.GetPotionColorIntensity() + g.GetComponent<Ingredient>().GetColIntensity());
             }
         }
         else if(potionInPot.GetPotionColor().ToString() != g.GetComponent<Ingredient>().GetIngredientColor().ToString())
@@ -72,47 +72,53 @@ public class PotionManager : MonoBehaviour
             if (potionInPot.GetPotionProperyIntensity() < 3)
             {
                 potionInPot.SetPotionProperty(g.GetComponent<Ingredient>().GetIngredientProperty().ToString());
-                potionInPot.SetPotionProperyIntensity(potionInPot.GetPotionProperyIntensity() + g.GetComponent<Ingredient>().GetIntensity());
+                potionInPot.SetPotionProperyIntensity(potionInPot.GetPotionProperyIntensity() + g.GetComponent<Ingredient>().GetPropIntensity());
             }
         }
     }
 
     void CreateColorCombo(GameObject g)
     {
-        if(potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
-        { 
-            potionInPot.SetPotionColor("Purple");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if (potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+        if(g.GetComponent<Potion>().GetPotionColorIntensity() == 1)
         {
-            potionInPot.SetPotionColor("Green");
-            potionInPot.SetPotionColorIntensity(2);
+            if (potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
+            {
+                potionInPot.SetPotionColor("Purple");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+            {
+                potionInPot.SetPotionColor("Green");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
+            {
+                potionInPot.SetPotionColor("Purple");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+            {
+                potionInPot.SetPotionColor("Orange");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
+            {
+                potionInPot.SetPotionColor("Green");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
+            {
+                potionInPot.SetPotionColor("Orange");
+                potionInPot.SetPotionColorIntensity(2);
+            }
         }
-        if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
+        if (g.GetComponent<Potion>().GetPotionColorIntensity() == 2)
         {
-            potionInPot.SetPotionColor("Purple");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
-        {
-            potionInPot.SetPotionColor("Orange");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
-        {
-            potionInPot.SetPotionColor("Green");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
-        {
-            potionInPot.SetPotionColor("Orange");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if(potionInPot.GetPotionColor() == Potion.Color.Orange || potionInPot.GetPotionColor() == Potion.Color.Purple || potionInPot.GetPotionColor() == Potion.Color.Green && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
-        {
-            potionInPot.SetPotionColor("Brown");
-            potionInPot.SetPotionColorIntensity(3);
+            if (potionInPot.GetPotionColor() == Potion.Color.Orange || potionInPot.GetPotionColor() == Potion.Color.Purple || potionInPot.GetPotionColor() == Potion.Color.Green && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+            {
+                potionInPot.SetPotionColor("Brown");
+                potionInPot.SetPotionColorIntensity(3);
+            }
         }
     }
 
