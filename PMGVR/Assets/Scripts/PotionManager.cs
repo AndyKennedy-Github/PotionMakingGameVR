@@ -15,6 +15,7 @@ public class PotionManager : MonoBehaviour
             potionInPot = GetComponentInChildren<Potion>();
         }
         RevertPotion();
+        ClearHeat();
     }
 
     void Update()
@@ -113,6 +114,17 @@ public class PotionManager : MonoBehaviour
             potionInPot.SetPotionColor("Brown");
             potionInPot.SetPotionColorIntensity(3);
         }
+    }
+
+    public void AddHeat(float f)
+    {
+        heatIndex += f;
+    }
+
+    public void ClearHeat()
+    {
+        heatIndex = 0;
+        isHot = false;
     }
 
     private void OnTriggerEnter(Collider other)
