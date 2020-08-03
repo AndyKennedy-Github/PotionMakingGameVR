@@ -44,4 +44,11 @@ public class LevelManager : MonoBehaviour
             Debug.Log("The Level is loaded!");
         }
     }
+
+    public void LoadTutorial()
+    {
+        gm.level = 0;
+        gm.levelDif = 0;
+        gm.StartLevel(gm.breathingTime, 60000);
+    }
 }

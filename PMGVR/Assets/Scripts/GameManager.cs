@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private Timer t;
+    public PotionManager pm;
     public LevelManager lm;
     public Map map;
 
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int firstStarGoal, secondStarGoal, thirdStarGoal;
     public int breathingTime = 5;
 
-    public bool inLevel, inMap, levelEnded, goldAdded, starsAdded, isMapActive = true;
+    public bool inLevel, inMap, levelEnded, goldAdded, starsAdded, isMapActive = true, isTutorial;
 
     void Awake()
     {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         lm = FindObjectOfType<LevelManager>();
         t = FindObjectOfType<Timer>();
         map = FindObjectOfType<Map>();
+        pm = FindObjectOfType<PotionManager>();
         inLevel = false;
         isMapActive = true;
     }
@@ -160,10 +162,39 @@ public class GameManager : MonoBehaviour
         map.mapType = 1;
     }
 
+    public void StartTutorial()
+    {
+        //starts game on Tutorial level
+        Debug.Log("Start Tutorial Level!");
+        isTutorial = true;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void OpenSettings()
+    {
+        //opens settings menu
+        map.mapType = 2;
+    }
+
+    public void OpenStore()
+    {
+        map.mapType = 3;
+    }
+
+    public void OpenMap()
+    {
+        map.mapType = 1;
+    }
+
     IEnumerator LevelStart(int i, int s)
     {
         StopCoroutine("EndofLevel");
         isMapActive = false;
+        pm.RevertPotion();
         yield return new WaitForSecondsRealtime(i);
         inLevel = true;
         t.timeInRound = s;

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PotionManager : MonoBehaviour
 {
     Potion potionInPot;
+    public float heatIndex;
+    public bool isHot;
 
     void Start()
     {
@@ -17,11 +19,17 @@ public class PotionManager : MonoBehaviour
 
     void Update()
     {
-        if(potionInPot != null)
+        if (heatIndex <= 0 && isHot == true)
         {
-            Debug.Log(potionInPot.GetPotionName());
+            isHot = false;
+            heatIndex = 0;
         }
-
+        if(heatIndex >= 100 && isHot == false)
+        {
+            isHot = true;
+            heatIndex = 100;
+        }
+        heatIndex -= Time.deltaTime;
     }
 
     public void RevertPotion()
@@ -109,10 +117,15 @@ public class PotionManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ingredient")
+        if(other.tag == "Ingredient" && isHot)
         {
             AddIngredientToPotion(other.gameObject);
             Destroy(other.gameObject);
+        }
+        else if(other.tag == "Ingredient" && !isHot)
+        {
+            //animation stuff
+            //floating ingredients
         }
         
         if(other.tag == "Bottle")
@@ -124,6 +137,15 @@ public class PotionManager : MonoBehaviour
         if(other.tag == "Nullifying Powder")
         {
             RevertPotion();
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Ingredient" && isHot)
+        {
+            AddIngredientToPotion(other.gameObject);
             Destroy(other.gameObject);
         }
     }
