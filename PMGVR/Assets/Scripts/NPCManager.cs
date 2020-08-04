@@ -22,6 +22,16 @@ public class NPCManager : MonoBehaviour
         
     }
 
+    public void StopNPCs()
+    {
+        StopCoroutine(Wait());
+    }
+
+    public void StartNPCs()
+    {
+        StartCoroutine(Wait());
+    }
+
     public void RemoveNPC(GameObject g)
     {
         npcs.Remove(g.GetComponent<NPC>());

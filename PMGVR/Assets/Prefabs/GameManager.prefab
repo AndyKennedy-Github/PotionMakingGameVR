@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4041955833068861827}
   - component: {fileID: 4041955833068861826}
   - component: {fileID: 4041955833068861824}
+  - component: {fileID: 4041955832726264949}
   m_Layer: 0
-  m_Name: GameManager 1
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,10 +45,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1625557459564264889406834730ca74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pm: {fileID: 0}
+  lm: {fileID: 4041955832726264949}
+  map: {fileID: 0}
+  totalGameGold: 0
+  levelGold: 0
+  levelGoldGoal: 0
+  totalGameStars: 0
+  levelStars: 0
+  levelDif: 0
+  level: 0
+  firstStarGoal: 0
+  secondStarGoal: 0
+  thirdStarGoal: 0
   breathingTime: 5
   inLevel: 0
   inMap: 0
   levelEnded: 0
+  goldAdded: 0
+  starsAdded: 0
+  isMapActive: 1
+  isTutorial: 0
 --- !u!114 &4041955833068861824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,5 +78,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456a76d801e255549b1390d044197ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeInRound: 120
+  timeInRound: 5
   startTime: 0
+--- !u!114 &4041955832726264949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041955833068861853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f788af45deab9dc44a65b47c498e8645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - {fileID: 0}
+  - {fileID: 0}
+  gm: {fileID: 4041955833068861826}

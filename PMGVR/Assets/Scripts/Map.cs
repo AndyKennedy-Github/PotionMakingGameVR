@@ -11,6 +11,7 @@ public class Map : MonoBehaviour
     public List<GameObject> optionButtons = new List<GameObject>();
     public List<GameObject> storeCatalog = new List<GameObject>();
     public List<GameObject> endLevelReport = new List<GameObject>();
+    public List<GameObject> pauseMenu = new List<GameObject>();
 
     void Awake()
     {
@@ -57,6 +58,10 @@ public class Map : MonoBehaviour
                     {
                         buttons.SetActive(false);
                     }
+                    foreach (GameObject buttons in pauseMenu)
+                    {
+                        buttons.SetActive(false);
+                    }
                     break;
                 case 1:
                     foreach (GameObject buttons in gameStartButtons)
@@ -76,6 +81,10 @@ public class Map : MonoBehaviour
                         buttons.SetActive(false);
                     }
                     foreach (GameObject buttons in endLevelReport)
+                    {
+                        buttons.SetActive(false);
+                    }
+                    foreach (GameObject buttons in pauseMenu)
                     {
                         buttons.SetActive(false);
                     }
@@ -101,6 +110,10 @@ public class Map : MonoBehaviour
                     {
                         buttons.SetActive(false);
                     }
+                    foreach (GameObject buttons in pauseMenu)
+                    {
+                        buttons.SetActive(false);
+                    }
                     break;
                 case 3:
                     foreach (GameObject buttons in gameStartButtons)
@@ -120,6 +133,10 @@ public class Map : MonoBehaviour
                         buttons.SetActive(true);
                     }
                     foreach (GameObject buttons in endLevelReport)
+                    {
+                        buttons.SetActive(false);
+                    }
+                    foreach (GameObject buttons in pauseMenu)
                     {
                         buttons.SetActive(false);
                     }
@@ -145,9 +162,40 @@ public class Map : MonoBehaviour
                     {
                         buttons.SetActive(true);
                     }
+                    foreach (GameObject buttons in pauseMenu)
+                    {
+                        buttons.SetActive(false);
+                    }
                     break;
+                case 5:
+                    foreach (GameObject buttons in gameStartButtons)
+                    {
+                        buttons.SetActive(false);
+                    }
+                    foreach (GameObject buttons in mapMarkers)
+                    {
+                        buttons.SetActive(false);
+                    }
+                    foreach (GameObject buttons in optionButtons)
+                    {
+                        buttons.SetActive(false);
+                    }
+                    foreach (GameObject buttons in storeCatalog)
+                    {
+                        buttons.SetActive(false);
+                    }
+                    foreach (GameObject buttons in endLevelReport)
+                    {
+                        buttons.SetActive(false);
+                    }
+                    foreach (GameObject buttons in pauseMenu)
+                    {
+                        buttons.SetActive(true);
+                    }
+                    break;
+
             }
-            
+
         }
     }
 

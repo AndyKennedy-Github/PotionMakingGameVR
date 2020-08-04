@@ -9,13 +9,14 @@ public class GameManager : MonoBehaviour
     private Timer t;
     public PotionManager pm;
     public LevelManager lm;
+    public NPCManager npcm;
     public Map map;
 
     public int totalGameGold, levelGold, levelGoldGoal, totalGameStars, levelStars, levelDif, level;
     public int firstStarGoal, secondStarGoal, thirdStarGoal;
     public int breathingTime = 5;
 
-    public bool inLevel, inMap, levelEnded, goldAdded, starsAdded, isMapActive = true, isTutorial;
+    public bool inLevel, inMap, levelEnded, goldAdded, starsAdded, isMapActive = true, isTutorial, isPaused;
 
     void Awake()
     {
@@ -193,6 +194,30 @@ public class GameManager : MonoBehaviour
     public void OpenTitle()
     {
         map.mapType = 0;
+    }
+
+    public void PauseGame()
+    {
+        if(!isPaused)
+        {
+            map.gameObject.SetActive(true);
+            map.mapType = 5;
+            t.startTime = false;
+            isPaused = true;
+            npcm.StopNPCs();
+        }
+    }
+
+    public void UnpauseGame()
+    {
+        if(isPaused)
+        {
+            map.gameObject.SetActive(false);
+            map.mapType = 5;
+            t.startTime = true;
+            isPaused = false;
+            npcm.StartNPCs();
+        }
     }
 
     IEnumerator LevelStart(int i, int s)
