@@ -190,6 +190,11 @@ public class GameManager : MonoBehaviour
         map.mapType = 1;
     }
 
+    public void OpenTitle()
+    {
+        map.mapType = 0;
+    }
+
     IEnumerator LevelStart(int i, int s)
     {
         StopCoroutine("EndofLevel");
