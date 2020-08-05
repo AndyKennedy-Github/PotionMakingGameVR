@@ -109,7 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matName: Eyeball
-  intensity: 0
+  colIntensity: 0
+  propIntensity: 0
   myColor: 6
   myProperty: 4
 --- !u!54 &6673998498273430353
@@ -155,7 +156,7 @@ MonoBehaviour:
   grabStyle: 1
   isGrabbed: 0
   isGrabbable: 1
-  isThrowable: 0
+  isThrowable: 1
   grabBreakforce: Infinity
   attach: {fileID: 0}
   puppetHandsGrabbing: []
