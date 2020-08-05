@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int totalGameGold, levelGold, levelGoldGoal, totalGameStars, levelStars, levelDif, level;
     public int firstStarGoal, secondStarGoal, thirdStarGoal;
     public int breathingTime = 5;
+    public Text NPCText;
 
     public bool inLevel, inMap, levelEnded, goldAdded, starsAdded, isMapActive = true, isTutorial, isPaused;
 
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
         if(inLevel)
         {
             StarCount();
+            NPCText.text = "The Knight Wants:" + "\n" + npcm.GetWaitingNPC().GetNPCPotion();
             //t.startTime = true;
         }
 

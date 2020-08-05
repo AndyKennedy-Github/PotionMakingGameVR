@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PotionManager : MonoBehaviour
 {
     Potion potionInPot;
+    
     public float heatIndex;
     public bool isHot;
-
+    public Text potionText, heatText;
     void Start()
     {
         if (potionInPot == null)
@@ -20,17 +22,30 @@ public class PotionManager : MonoBehaviour
 
     void Update()
     {
-        if (heatIndex <= 0 && isHot == true)
+        if (heatIndex < 0)
         {
-            isHot = false;
+           if( isHot == true)
+           {
+                isHot = false;
+           }
             heatIndex = 0;
+            heatText.text = "Current Heat Level: 0";
         }
-        if(heatIndex >= 100 && isHot == false)
+        else if(heatIndex >= 100)
         {
-            isHot = true;
+            if(isHot == false)
+            {
+                isHot = true;
+            }
             heatIndex = 100;
+            heatText.text = "Current Heat Level: 100";
+        }
+        else
+        {
+            heatText.text = "Current Heat Level: " + heatIndex;
         }
         heatIndex -= Time.deltaTime;
+        potionText.text = "Potion in the Pot:" + "\n" + potionInPot.GetPotionName();
     }
 
     public void RevertPotion()

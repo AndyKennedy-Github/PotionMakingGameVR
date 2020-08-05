@@ -16,12 +16,6 @@ public class NPCManager : MonoBehaviour
         StartCoroutine(Wait());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void StopNPCs()
     {
         StopCoroutine(Wait());
