@@ -29,7 +29,7 @@ public class PotionManager : MonoBehaviour
                 isHot = false;
            }
             heatIndex = 0;
-            heatText.text = "Current Heat Level: 0";
+            heatText.text = "Current Heat Level: 0" + "\n" + "I'm Cold!";
         }
         else if(heatIndex >= 100)
         {
@@ -38,11 +38,19 @@ public class PotionManager : MonoBehaviour
                 isHot = true;
             }
             heatIndex = 100;
-            heatText.text = "Current Heat Level: 100";
+            heatText.text = "Current Heat Level: 100" + "\n" + "I'm Hot!";
         }
         else
         {
-            heatText.text = "Current Heat Level: " + heatIndex;
+            if(isHot)
+            {
+                heatText.text = "Current Heat Level: " + heatIndex + "\n" + "I'm Hot!";
+            }
+            else if(!isHot)
+            {
+                heatText.text = "Current Heat Level: " + heatIndex + "\n" + "I'm Cold!";
+            }
+            
         }
         heatIndex -= Time.deltaTime;
         potionText.text = "Potion in the Pot:" + "\n" + potionInPot.GetPotionName();
