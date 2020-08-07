@@ -59,6 +59,8 @@ public class NPC : Potion
             //Moves off screen (probs around carriage) and then despawning
             //Also transfers beingserved to next character in line
         }
+
+        DestroyNPC();
     }
 
     int FindPreviousNPC()
@@ -170,6 +172,7 @@ public class NPC : Potion
         myPotion.SetPotionColorIntensity(myColorIntensity);
         myPotion.SetPotionProperty(wantedProperty);
         myPotion.SetPotionProperyIntensity(myPropertyIntensity);
+        goldAmount = 100;
     }
 
     void MakeMediumPotion()
@@ -197,6 +200,7 @@ public class NPC : Potion
         myPotion.SetPotionColorIntensity(myColorIntensity);
         myPotion.SetPotionProperty(wantedProperty);
         myPotion.SetPotionProperyIntensity(myPropertyIntensity);
+        goldAmount = 200;
     }
 
     void MakeHardPotion()
@@ -220,6 +224,7 @@ public class NPC : Potion
         myPotion.SetPotionColorIntensity(myColorIntensity);
         myPotion.SetPotionProperty(wantedProperty);
         myPotion.SetPotionProperyIntensity(myPropertyIntensity);
+        goldAmount = 300;
     }
 
     void MakeExpertPotion()
@@ -231,6 +236,7 @@ public class NPC : Potion
         myPotion.SetPotionColorIntensity(myColorIntensity);
         myPotion.SetPotionProperty(wantedProperty);
         myPotion.SetPotionProperyIntensity(myPropertyIntensity);
+        goldAmount = 400;
     }
 
     void SetGoldAmount(int i)
@@ -254,6 +260,14 @@ public class NPC : Potion
         else if(!b)
         {
             potionObtained = true;
+        }
+    }
+
+    void DestroyNPC()
+    {
+        if(gm.inLevel == false)
+        {
+            Destroy(this.gameObject);
         }
     }
 }

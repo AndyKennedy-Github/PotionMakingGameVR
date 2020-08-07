@@ -16,10 +16,14 @@ public class NPCManager : MonoBehaviour
         StartCoroutine(Wait());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StopNPCs()
     {
-        
+        StopCoroutine(Wait());
+    }
+
+    public void StartNPCs()
+    {
+        StartCoroutine(Wait());
     }
 
     public void RemoveNPC(GameObject g)
@@ -60,7 +64,7 @@ public class NPCManager : MonoBehaviour
     {
         while(true)
         {
-            while (npcs.Count < npcMax)
+            while (npcs.Count < npcMax && gm.inLevel)
             {
                 SpawnNPC();
                 yield return new WaitForSecondsRealtime(npcRecharge);

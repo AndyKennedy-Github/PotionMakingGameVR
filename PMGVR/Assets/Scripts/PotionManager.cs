@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PotionManager : MonoBehaviour
 {
     Potion potionInPot;
-
+    
+    public float heatIndex;
+    public bool isHot;
+    public Text potionText, heatText;
     void Start()
     {
         if (potionInPot == null)
@@ -13,15 +17,43 @@ public class PotionManager : MonoBehaviour
             potionInPot = GetComponentInChildren<Potion>();
         }
         RevertPotion();
+        ClearHeat();
     }
 
     void Update()
     {
-        if(potionInPot != null)
+        if (heatIndex < 0)
         {
-            Debug.Log(potionInPot.GetPotionName());
+           if( isHot == true)
+           {
+                isHot = false;
+           }
+            heatIndex = 0;
+            heatText.text = "Current Heat Level: 0" + "\n" + "I'm Cold!";
         }
-
+        else if(heatIndex >= 100)
+        {
+            if(isHot == false)
+            {
+                isHot = true;
+            }
+            heatIndex = 100;
+            heatText.text = "Current Heat Level: 100" + "\n" + "I'm Hot!";
+        }
+        else
+        {
+            if(isHot)
+            {
+                heatText.text = "Current Heat Level: " + heatIndex + "\n" + "I'm Hot!";
+            }
+            else if(!isHot)
+            {
+                heatText.text = "Current Heat Level: " + heatIndex + "\n" + "I'm Cold!";
+            }
+            
+        }
+        heatIndex -= Time.deltaTime;
+        potionText.text = "Potion in the Pot:" + "\n" + potionInPot.GetPotionName();
     }
 
     public void RevertPotion()
@@ -50,7 +82,7 @@ public class PotionManager : MonoBehaviour
             if(potionInPot.GetPotionColorIntensity() < 3)
             {
                 potionInPot.SetPotionColor(g.GetComponent<Ingredient>().GetIngredientColor().ToString());
-                potionInPot.SetPotionColorIntensity(potionInPot.GetPotionColorIntensity() + g.GetComponent<Ingredient>().GetIntensity());
+                potionInPot.SetPotionColorIntensity(potionInPot.GetPotionColorIntensity() + g.GetComponent<Ingredient>().GetColIntensity());
             }
         }
         else if(potionInPot.GetPotionColor().ToString() != g.GetComponent<Ingredient>().GetIngredientColor().ToString())
@@ -63,56 +95,78 @@ public class PotionManager : MonoBehaviour
             if (potionInPot.GetPotionProperyIntensity() < 3)
             {
                 potionInPot.SetPotionProperty(g.GetComponent<Ingredient>().GetIngredientProperty().ToString());
-                potionInPot.SetPotionProperyIntensity(potionInPot.GetPotionProperyIntensity() + g.GetComponent<Ingredient>().GetIntensity());
+                potionInPot.SetPotionProperyIntensity(potionInPot.GetPotionProperyIntensity() + g.GetComponent<Ingredient>().GetPropIntensity());
             }
         }
     }
 
     void CreateColorCombo(GameObject g)
     {
-        if(potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
-        { 
-            potionInPot.SetPotionColor("Purple");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if (potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+        if(g.GetComponent<Potion>().GetPotionColorIntensity() == 1)
         {
-            potionInPot.SetPotionColor("Green");
-            potionInPot.SetPotionColorIntensity(2);
+            if (potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
+            {
+                potionInPot.SetPotionColor("Purple");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Blue && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+            {
+                potionInPot.SetPotionColor("Green");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
+            {
+                potionInPot.SetPotionColor("Purple");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+            {
+                potionInPot.SetPotionColor("Orange");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
+            {
+                potionInPot.SetPotionColor("Green");
+                potionInPot.SetPotionColorIntensity(2);
+            }
+            if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
+            {
+                potionInPot.SetPotionColor("Orange");
+                potionInPot.SetPotionColorIntensity(2);
+            }
         }
-        if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
+        if (g.GetComponent<Potion>().GetPotionColorIntensity() == 2)
         {
-            potionInPot.SetPotionColor("Purple");
-            potionInPot.SetPotionColorIntensity(2);
+            if (potionInPot.GetPotionColor() == Potion.Color.Orange || potionInPot.GetPotionColor() == Potion.Color.Purple || potionInPot.GetPotionColor() == Potion.Color.Green && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
+            {
+                potionInPot.SetPotionColor("Brown");
+                potionInPot.SetPotionColorIntensity(3);
+            }
         }
-        if (potionInPot.GetPotionColor() == Potion.Color.Red && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
-        {
-            potionInPot.SetPotionColor("Orange");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue)
-        {
-            potionInPot.SetPotionColor("Green");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if (potionInPot.GetPotionColor() == Potion.Color.Yellow && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red)
-        {
-            potionInPot.SetPotionColor("Orange");
-            potionInPot.SetPotionColorIntensity(2);
-        }
-        if(potionInPot.GetPotionColor() == Potion.Color.Orange || potionInPot.GetPotionColor() == Potion.Color.Purple || potionInPot.GetPotionColor() == Potion.Color.Green && g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Red || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Blue || g.GetComponent<Ingredient>().GetIngredientColor() == Ingredient.Color.Yellow)
-        {
-            potionInPot.SetPotionColor("Brown");
-            potionInPot.SetPotionColorIntensity(3);
-        }
+    }
+
+    public void AddHeat(float f)
+    {
+        heatIndex += f;
+    }
+
+    public void ClearHeat()
+    {
+        heatIndex = 0;
+        isHot = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ingredient")
+        if(other.tag == "Ingredient" && isHot)
         {
             AddIngredientToPotion(other.gameObject);
             Destroy(other.gameObject);
+        }
+        else if(other.tag == "Ingredient" && !isHot)
+        {
+            //animation stuff
+            //floating ingredients
         }
         
         if(other.tag == "Bottle")
@@ -124,6 +178,15 @@ public class PotionManager : MonoBehaviour
         if(other.tag == "Nullifying Powder")
         {
             RevertPotion();
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Ingredient" && isHot)
+        {
+            AddIngredientToPotion(other.gameObject);
             Destroy(other.gameObject);
         }
     }

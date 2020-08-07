@@ -7,6 +7,9 @@ TagManager:
   - Nullifying Powder
   - Ingredient
   - Knight
+  - Bottle
+  - Wood
+  - Juiceable
   layers:
   - Default
   - TransparentFX

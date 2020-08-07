@@ -11,7 +11,7 @@ namespace PuppetJump.Objs
     public class Touchable : MonoBehaviour
     {
         public bool isTouchable = true;                         // can the object currently be touched
-        [ReadOnly]
+        //[ReadOnly]
         public bool isTouched = false;                          // is the object currently being touched
         [ReadOnly]
         public bool wasTouched = false;                         // a check if the object was previously declared touched or not, prevents constant touching events
@@ -28,7 +28,6 @@ namespace PuppetJump.Objs
         public virtual void Touch()
         {
             isTouched = true;
-
             // if a toucher has touched this object
             // and it has not already been labled as touched
             if (!wasTouched)
