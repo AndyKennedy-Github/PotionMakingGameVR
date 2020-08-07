@@ -241,15 +241,18 @@ public class GameManager : MonoBehaviour
     {
         StopCoroutine("LevelStart");
         isMapActive = true;
+        OpenMap();
         Debug.Log("Running the End of Level checks!");
         inLevel = false;
         if(goldAdded == false)
         {
+            //levelGold = 1000;
             totalGameGold += levelGold;
             goldAdded = true;
         }
         if (starsAdded == false)
         {
+            //levelStars = 2;
             totalGameStars += levelStars;
             lm.levels[level].starsAcquired += levelStars;
             starsAdded = true;
