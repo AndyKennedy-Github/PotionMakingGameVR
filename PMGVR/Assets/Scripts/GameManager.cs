@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private Timer t;
+    public OutfitManager om;
+    public ItemManager im;
     public PotionManager pm;
     public LevelManager lm;
     public NPCManager npcm;
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Text NPCText;
 
     public bool inLevel, inMap, levelEnded, goldAdded, starsAdded, isMapActive = true, isTutorial, isPaused;
+    public List<bool> itemUnlocks = new List<bool>();
 
     void Awake()
     {
@@ -163,6 +166,17 @@ public class GameManager : MonoBehaviour
             lm.levels[i].secondStarGot = ES3.Load<bool>("Level " + i + " SecondStarGot");
             lm.levels[i].thirdStarGot = ES3.Load<bool>("Level " + i + " ThirdStarGot"); 
         }
+        for (int i = 0; i < itemUnlocks.Count; i++)
+        {
+            if (ES3.KeyExists("Item " + i + "Unlocked"))
+            {
+                itemUnlocks[i] = ES3.Load<bool>("Item " + i + "Unlocked");
+                if(i > om.outfits.Count)
+                {
+                    im.ActivateItem(i - om.outfits.Count - 1);
+                }
+            }
+        }
         map.mapType = 1;
     }
 
@@ -199,6 +213,29 @@ public class GameManager : MonoBehaviour
         map.mapType = 0;
     }
 
+    public void Buy(int i)
+    {
+        if (totalGameGold > i)
+        {
+            totalGameGold -= i;
+            SaveGame();
+        }
+    }
+
+    public void EnableItem(int i)
+    {
+        itemUnlocks[i] = true;
+        if(i <= om.outfits.Count)
+        {
+            om.currentOutfit = om.outfits[i];
+            ES3.Save("Current Outfit", om.currentOutfit);
+        }
+        else if(i > om.outfits.Count)
+        {
+            im.ActivateItem(i - om.outfits.Count - 1);
+        }
+    }
+
     public void PauseGame()
     {
         if(!isPaused)
@@ -220,6 +257,33 @@ public class GameManager : MonoBehaviour
             t.startTime = true;
             isPaused = false;
             npcm.StartNPCs();
+        }
+    }
+
+    public void SaveGame()
+    {
+        ES3.Save("TotalGold", totalGameGold);
+        ES3.Save("TotalStars", totalGameStars);
+        for (int i = 0; i < lm.levels.Count; i++)
+        {
+            if (lm.levels[i].starsAcquired > 0)
+            {
+                ES3.Save("Level " + i + " StarsAcquired", lm.levels[i].starsAcquired);
+            }
+            if (lm.levels[i].goldHighScore > 0)
+            {
+                ES3.Save("Level " + i + " HighScore", lm.levels[i].goldHighScore);
+            }
+            ES3.Save("Level " + i + " FirstStarGot", lm.levels[level].firstStarGot);
+            ES3.Save("Level " + i + " SecondStarGot", lm.levels[level].secondStarGot);
+            ES3.Save("Level " + i + " ThirdStarGot", lm.levels[level].thirdStarGot);
+        }
+        for(int i = 0; i < itemUnlocks.Count; i ++)
+        {
+            if(itemUnlocks[i] == true)
+            {
+                ES3.Save("Item " + i + "Unlocked", itemUnlocks[i]);
+            }
         }
     }
 
@@ -246,13 +310,11 @@ public class GameManager : MonoBehaviour
         inLevel = false;
         if(goldAdded == false)
         {
-            //levelGold = 1000;
             totalGameGold += levelGold;
             goldAdded = true;
         }
         if (starsAdded == false)
         {
-            //levelStars = 2;
             totalGameStars += levelStars;
             lm.levels[level].starsAcquired += levelStars;
             starsAdded = true;
@@ -262,23 +324,7 @@ public class GameManager : MonoBehaviour
             lm.levels[level].goldHighScore = levelGold;
         }
         ResetLevelGoldandStars();
-        ES3.Save("TotalGold", totalGameGold);
-        ES3.Save("TotalStars", totalGameStars);
-        //ES3.Save("Levels", lm.levels);
-        for(int i = 0; i < lm.levels.Count; i++)
-        {
-            if(lm.levels[i].starsAcquired > 0)
-            {
-                ES3.Save("Level " + i + " StarsAcquired", lm.levels[i].starsAcquired);
-            }
-            if(lm.levels[i].goldHighScore > 0)
-            {
-                ES3.Save("Level " + i + " HighScore", lm.levels[i].goldHighScore);
-            }
-            ES3.Save("Level " + i + " FirstStarGot", lm.levels[level].firstStarGot);
-            ES3.Save("Level " + i + " SecondStarGot", lm.levels[level].secondStarGot);
-            ES3.Save("Level " + i + " ThirdStarGot", lm.levels[level].thirdStarGot);
-        }
+        SaveGame();
         levelEnded = true;
         yield return null;
     }

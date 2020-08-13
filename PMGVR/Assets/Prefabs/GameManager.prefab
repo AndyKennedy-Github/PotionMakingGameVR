@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4041955833068861826}
   - component: {fileID: 4041955833068861824}
   - component: {fileID: 4041955832726264949}
+  - component: {fileID: 4041955832726264950}
+  - component: {fileID: 4041955832726264951}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1625557459564264889406834730ca74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  om: {fileID: 4041955832726264951}
+  im: {fileID: 4041955832726264950}
   pm: {fileID: 0}
   lm: {fileID: 4041955832726264949}
   npcm: {fileID: 0}
@@ -69,6 +73,7 @@ MonoBehaviour:
   isMapActive: 1
   isTutorial: 0
   isPaused: 0
+  itemUnlocks: 
 --- !u!114 &4041955833068861824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,3 +104,32 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   gm: {fileID: 4041955833068861826}
+--- !u!114 &4041955832726264950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041955833068861853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78487feda53c4f84ca96724866e3f6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  om: {fileID: 4041955832726264951}
+  gm: {fileID: 4041955833068861826}
+  items: []
+--- !u!114 &4041955832726264951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041955833068861853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ed1d057bdc65c4780d508bc3506877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentOutfit: {fileID: 0}
+  outfits: []
