@@ -7,7 +7,7 @@ namespace PuppetJump.Objs
     public class RespawnItem : MonoBehaviour
     {
         public GameObject respawnItem;
-        public Touchable touch;
+        public Grabbable grabbed;
         public string itemTag;
         private Vector3 respawnCube;
 
@@ -16,13 +16,10 @@ namespace PuppetJump.Objs
         {
             if (other.CompareTag(itemTag))
             {
-                touch = other.transform.GetComponent<Touchable>();
+                grabbed = other.transform.GetComponent<Grabbable>();
                 respawnCube = new Vector3(Random.Range(transform.position.x - .2f, transform.position.x + .2f), transform.position.y, Random.Range(transform.position.z - .2f, transform.position.z + .2f));
                 StartCoroutine(ReplaceItem(other.gameObject));
-                if(touch.isTouched == false)
-                {
-                    StartCoroutine(DestroyObj(other.gameObject));
-                }
+                other.transform.GetComponent<Ingredient>().isInBox = false;
             }
         }
 
@@ -31,13 +28,6 @@ namespace PuppetJump.Objs
             yield return new WaitForSeconds(3);
             Instantiate(respawnItem, respawnCube, Quaternion.identity);
             StopCoroutine("ReplaceItem");
-        }
-
-        IEnumerator DestroyObj(GameObject g)
-        {
-            yield return new WaitForSeconds(3);
-            Destroy(g);
-            StopCoroutine("DestroyObj");
         }
     }
 }

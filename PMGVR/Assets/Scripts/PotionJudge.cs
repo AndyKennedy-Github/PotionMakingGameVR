@@ -2,36 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PotionJudge : MonoBehaviour
+namespace PuppetJump.Objs
 {
-    NPCManager npcgm;
-    PotionManager pm;
-    // Start is called before the first frame update
-    void Start()
+    public class PotionJudge : MonoBehaviour
     {
-        npcgm = FindObjectOfType<NPCManager>();
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Bottle"))
+        NPCManager npcgm;
+        PotionManager pm;
+        // Start is called before the first frame update
+        void Start()
         {
-            if(npcgm.GetWaitingNPC().GetNPCPotion().ToString() == other.GetComponent<Bottle>().GetPotionInBottleName().ToString())
+            npcgm = FindObjectOfType<NPCManager>();
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Bottle"))
             {
-                Debug.Log("That was the right potion!");
-                Debug.Log(npcgm.GetWaitingNPC().GetNPCPotion().ToString());
-                Debug.Log(other.GetComponent<Bottle>().GetPotionInBottleName().ToString());
-                npcgm.GetWaitingNPC().NPCServed(true);
+                if (npcgm.GetWaitingNPC().GetNPCPotion().ToString() == other.GetComponent<Bottle>().GetPotionInBottleName().ToString())
+                {
+                    Debug.Log("That was the right potion!");
+                    Debug.Log(npcgm.GetWaitingNPC().GetNPCPotion().ToString());
+                    Debug.Log(other.GetComponent<Bottle>().GetPotionInBottleName().ToString());
+                    npcgm.GetWaitingNPC().NPCServed(true);
+                }
+                else if (npcgm.GetWaitingNPC().GetNPCPotion().ToString() != other.GetComponent<Bottle>().GetPotionInBottleName().ToString())
+                {
+                    Debug.Log("That was the wrong potion!");
+                    Debug.Log(npcgm.GetWaitingNPC().GetNPCPotion().ToString());
+                    Debug.Log(other.GetComponent<Bottle>().GetPotionInBottleName().ToString());
+                    npcgm.GetWaitingNPC().NPCServed(false);
+                }
+                //Destroy(other.gameObject);
             }
-            else if (npcgm.GetWaitingNPC().GetNPCPotion().ToString() != other.GetComponent<Bottle>().GetPotionInBottleName().ToString())
-            {
-                Debug.Log("That was the wrong potion!");
-                Debug.Log(npcgm.GetWaitingNPC().GetNPCPotion().ToString());
-                Debug.Log(other.GetComponent<Bottle>().GetPotionInBottleName().ToString());
-                npcgm.GetWaitingNPC().NPCServed(false);
-            }
-            //Destroy(other.gameObject);
         }
     }
 }

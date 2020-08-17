@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Furnace : MonoBehaviour
+namespace PuppetJump.Objs
 {
-    public PotionManager pm;
-    // Start is called before the first frame update
-    void Start()
+    public class Furnace : MonoBehaviour
     {
-        pm = FindObjectOfType<PotionManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Wood")
+        public PotionManager pm;
+        // Start is called before the first frame update
+        void Start()
         {
-            pm.AddHeat(25);
-            Destroy(other.gameObject);
+            pm = FindObjectOfType<PotionManager>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Wood")
+            {
+                pm.AddHeat(25);
+                Destroy(other.gameObject);
+            }
         }
     }
 }
