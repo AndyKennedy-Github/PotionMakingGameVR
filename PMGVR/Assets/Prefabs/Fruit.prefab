@@ -167,5 +167,6 @@ MonoBehaviour:
   matName: 
   colIntensity: 0
   propIntensity: 0
+  isInBox: 1
   myColor: 6
-  myProperty: 4
+  myProperty: 5

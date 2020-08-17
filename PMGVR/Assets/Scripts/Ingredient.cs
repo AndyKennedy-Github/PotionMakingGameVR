@@ -14,7 +14,7 @@ namespace PuppetJump.Objs
         private Grabbable grabbed;
 
         public enum Color { Blue, Red, Yellow, Purple, Green, Orange, Null };
-        public enum Property { Acidic, Explosive, Freezing, Flammable, Null };
+        public enum Property { Acidic, Explosive, Freezing, Flammable, Glow, Null };
 
         public Color myColor = Color.Null;
 
@@ -53,6 +53,9 @@ namespace PuppetJump.Objs
                     break;
                 case "Flamable":
                     myProperty = Property.Flammable;
+                    break;
+                case "Glow":
+                    myProperty = Property.Glow;
                     break;
                 case "Null":
                     myProperty = Property.Null;

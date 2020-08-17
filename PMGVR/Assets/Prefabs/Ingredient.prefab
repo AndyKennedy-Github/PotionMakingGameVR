@@ -110,8 +110,9 @@ MonoBehaviour:
   matName: 
   colIntensity: 0
   propIntensity: 0
+  isInBox: 1
   myColor: 6
-  myProperty: 4
+  myProperty: 5
 --- !u!54 &1427845587426308170
 Rigidbody:
   m_ObjectHideFlags: 0
