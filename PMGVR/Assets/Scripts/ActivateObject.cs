@@ -2,37 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivateObject : MonoBehaviour
+namespace PuppetJump.Objs
 {
-    public OutfitManager om;
-    public GameManager gm;
-    public int item;
-    // Start is called before the first frame update
-    void Start()
+    public class ActivateObject : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Activate()
-    {
-        if(gm.itemUnlocks[item] == true)
+        public OutfitManager om;
+        public GameManager gm;
+        public int item;
+        // Start is called before the first frame update
+        void Start()
         {
-            if(this.gameObject.CompareTag("OutfitButton"))
-            {
-                om.currentOutfit = om.outfits[item];
-                ES3.Save("Current Outfit", om.currentOutfit);
-            }
-            if(this.gameObject.CompareTag("ItemButton"))
-            {
 
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void Activate()
+        {
+            if (gm.itemUnlocks[item] == true)
+            {
+                if (this.gameObject.CompareTag("OutfitButton"))
+                {
+                    om.currentOutfit = om.outfits[item];
+                    ES3.Save("Current Outfit", om.currentOutfit);
+                }
+                if (this.gameObject.CompareTag("ItemButton"))
+                {
+
+                }
+                //enable object in scene, may be different for different types of items
             }
-            //enable object in scene, may be different for different types of items
         }
     }
 }

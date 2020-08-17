@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SaveTest : MonoBehaviour
+namespace PuppetJump.Objs
 {
-    public Text moneyText;
-    public GameManager gm;
-
-    // Update is called once per frame
-    void Update()
+    public class SaveTest : MonoBehaviour
     {
-        moneyText.text = "Total Money: " + gm.totalGameGold + "\n" + "Total Stars: " + gm.totalGameStars;
+        public Text moneyText;
+        public GameManager gm;
+
+        // Update is called once per frame
+        void Update()
+        {
+            moneyText.text = "Total Money: " + gm.totalGameGold + "\n" + "Total Stars: " + gm.totalGameStars;
+        }
     }
 }
