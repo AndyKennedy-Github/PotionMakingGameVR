@@ -164,7 +164,7 @@ namespace PuppetJump.Objs
             else if (randomPotionNumber > 50)
             {
                 wantedColor = Color.Null;
-                wantedProperty = (Property)Random.Range(0, 5);
+                wantedProperty = (Property)Random.Range(0, 4);
                 if (wantedProperty.ToString() != "Null")
                 {
                     myPropertyIntensity = 1;
@@ -180,7 +180,7 @@ namespace PuppetJump.Objs
         void MakeMediumPotion()
         {
             wantedColor = (Color)Random.Range(0, 5);
-            wantedProperty = (Property)Random.Range(0, 5);
+            wantedProperty = (Property)Random.Range(0, 4);
             if (wantedColor.ToString() == "Null")
             {
                 myColorIntensity = 0;
@@ -208,7 +208,7 @@ namespace PuppetJump.Objs
         void MakeHardPotion()
         {
             wantedColor = (Color)Random.Range(0, 6);
-            wantedProperty = (Property)Random.Range(0, 4);
+            wantedProperty = (Property)Random.Range(0, 3);
             if (wantedColor.ToString() == "Yellow" || wantedColor.ToString() == "Red" || wantedColor.ToString() == "Blue")
             {
                 myColorIntensity = Random.Range(2, 3);
@@ -232,7 +232,7 @@ namespace PuppetJump.Objs
         void MakeExpertPotion()
         {
             wantedColor = Color.Brown;
-            wantedProperty = (Property)Random.Range(0, 4);
+            wantedProperty = (Property)Random.Range(0, 3);
             myPropertyIntensity = 3;
             myPotion.SetPotionColor(wantedColor);
             myPotion.SetPotionColorIntensity(myColorIntensity);
