@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5104192199508283479}
   - component: {fileID: 8959453429544084252}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Collision Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 2421714803881533105}
   - component: {fileID: 6386162849928784594}
   - component: {fileID: 3417112313603693185}
+  - component: {fileID: 1332045032}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -265,6 +266,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1332045032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154656215021838643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b30d7d3e555cf4c81871416463a07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pm: {fileID: 639829555}
 --- !u!1 &1358218431194315048
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +651,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &809261912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774656405426394784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1573aadc89ff4514e8f46df605a25ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorIntensity: 0
+  propertyIntensity: 0
+  myColor: 7
+  myProperty: 4
 --- !u!1 &6870709388422917701
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +679,7 @@ GameObject:
   - component: {fileID: 6870709388422917698}
   - component: {fileID: 6870709388422917699}
   - component: {fileID: 639829555}
+  - component: {fileID: 1595517864}
   m_Layer: 0
   m_Name: Cauldron
   m_TagString: Untagged
@@ -734,6 +765,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heatIndex: 0
   isHot: 0
+  potionText: {fileID: 0}
+  heatText: {fileID: 0}
+--- !u!65 &1595517864
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870709388422917701}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.61, z: 1}
+  m_Center: {x: -0.000000044703484, y: 0, z: 0}
 --- !u!1 &7047058005637098314
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,6 +888,12 @@ PrefabInstance:
 --- !u!4 &6774656405426394788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6774656405364609278, guid: 553ab04fb613d4945abd74b6e8aea0ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 232179290}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6774656405426394784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6774656405364609274, guid: 553ab04fb613d4945abd74b6e8aea0ae,
     type: 3}
   m_PrefabInstance: {fileID: 232179290}
   m_PrefabAsset: {fileID: 0}
