@@ -10,6 +10,7 @@ namespace PuppetJump.Objs
         public Grabbable grabbed;
         public string itemTag;
         private Vector3 respawnCube;
+        public List<GameObject> children = new List<GameObject>();
 
 
         void OnTriggerExit(Collider other)
@@ -25,8 +26,20 @@ namespace PuppetJump.Objs
 
         IEnumerator ReplaceItem(GameObject g)
         {
+            foreach (GameObject kid in children)
+            {
+                if (kid == null)
+                {
+                    children.Remove(kid);
+                }
+            }
             yield return new WaitForSeconds(3);
-            Instantiate(respawnItem, respawnCube, Quaternion.identity);
+            if(children.Count < 3)
+            {
+                GameObject newkid = Instantiate(respawnItem, respawnCube, Quaternion.identity);
+                children.Add(newkid);
+            }
+
             StopCoroutine("ReplaceItem");
         }
     }

@@ -156,7 +156,7 @@ MonoBehaviour:
   propIntensity: 0
   isInBox: 1
   myColor: 0
-  myProperty: 4
+  myProperty: 5
 --- !u!135 &2221744109060375060
 SphereCollider:
   m_ObjectHideFlags: 0

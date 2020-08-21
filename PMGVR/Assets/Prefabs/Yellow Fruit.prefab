@@ -322,7 +322,7 @@ MonoBehaviour:
   propIntensity: 0
   isInBox: 1
   myColor: 2
-  myProperty: 4
+  myProperty: 5
 --- !u!114 &1859153538
 MonoBehaviour:
   m_ObjectHideFlags: 0
