@@ -86,6 +86,10 @@ namespace PuppetJump.Objs
                     potionInPot.SetPotionColor(g.GetComponent<Ingredient>().GetIngredientColor().ToString());
                     potionInPot.SetPotionColorIntensity(potionInPot.GetPotionColorIntensity() + g.GetComponent<Ingredient>().GetColIntensity());
                 }
+                if (potionInPot.GetPotionColorIntensity() > 3)
+                {
+                    potionInPot.SetPotionColorIntensity(3);
+                }
             }
             else if (potionInPot.GetPotionColor().ToString() != g.GetComponent<Ingredient>().GetIngredientColor().ToString())
             {
@@ -98,6 +102,10 @@ namespace PuppetJump.Objs
                 {
                     potionInPot.SetPotionProperty(g.GetComponent<Ingredient>().GetIngredientProperty().ToString());
                     potionInPot.SetPotionProperyIntensity(potionInPot.GetPotionProperyIntensity() + g.GetComponent<Ingredient>().GetPropIntensity());
+                    if(potionInPot.GetPotionProperyIntensity() > 3)
+                    {
+                        potionInPot.SetPotionProperyIntensity(3);
+                    }
                 }
             }
         }
@@ -160,7 +168,7 @@ namespace PuppetJump.Objs
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Ingredient" && isHot)
+            /*if (other.tag == "Ingredient" && isHot)
             {
                 AddIngredientToPotion(other.gameObject);
                 Destroy(other.gameObject);
@@ -169,7 +177,7 @@ namespace PuppetJump.Objs
             {
                 //animation stuff
                 //floating ingredients
-            }
+            }*/
 
             if (other.tag == "Bottle")
             {

@@ -227,7 +227,10 @@ public class Potion : MonoBehaviour
                 prop = "Freezing ";
                 break;
             case Property.Flammable:
-                prop = "Flamable ";
+                prop = "Flammable ";
+                break;
+            case Property.Glow:
+                prop = "Glowing ";
                 break;
             case Property.Null:
                 prop = "Effectless ";

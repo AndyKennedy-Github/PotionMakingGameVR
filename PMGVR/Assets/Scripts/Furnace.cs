@@ -7,6 +7,7 @@ namespace PuppetJump.Objs
     public class Furnace : MonoBehaviour
     {
         public PotionManager pm;
+        public int woodHeat = 25;
         // Start is called before the first frame update
         void Start()
         {
@@ -23,7 +24,7 @@ namespace PuppetJump.Objs
         {
             if (other.tag == "Wood")
             {
-                pm.AddHeat(25);
+                pm.AddHeat(woodHeat);
                 Destroy(other.gameObject);
             }
         }
