@@ -104,8 +104,11 @@ public class Potion : MonoBehaviour
             case "Freezing":
                 myProperty = Property.Freezing;
                 break;
-            case "Flamable":
+            case "Flammable":
                 myProperty = Property.Flammable;
+                break;
+            case "Glow":
+                myProperty = Property.Glow;
                 break;
             case "Null":
                 myProperty = Property.Null;
@@ -148,6 +151,9 @@ public class Potion : MonoBehaviour
                 break;
             case Property.Flammable:
                 myProperty = Property.Flammable;
+                break;
+            case Property.Glow:
+                myProperty = Property.Glow;
                 break;
             case Property.Null:
                 myProperty = Property.Null;

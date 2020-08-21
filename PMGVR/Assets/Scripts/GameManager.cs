@@ -53,8 +53,14 @@ namespace PuppetJump.Objs
             if (inLevel)
             {
                 StarCount();
-                NPCText.text = "The Knight Wants:" + "\n" + npcm.GetWaitingNPC().GetNPCPotion();
-                //t.startTime = true;
+                if (npcm.GetWaitingNPC() == null)
+                {
+                    NPCText.text = "The Knight Wants:";
+                }
+                else if (npcm.GetWaitingNPC() != null)
+                {
+                    NPCText.text = "The Knight Wants:" + "\n" + npcm.GetWaitingNPC().GetNPCPotion();
+                }
             }
 
             if (t.timeInRound <= 0)
