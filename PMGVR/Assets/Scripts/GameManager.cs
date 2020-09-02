@@ -20,7 +20,7 @@ namespace PuppetJump.Objs
         public int totalGameGold, levelGold, levelGoldGoal, totalGameStars, levelStars, levelDif, level;
         public int firstStarGoal, secondStarGoal, thirdStarGoal;
         public int breathingTime = 5;
-        public Text NPCText;
+        public Text NPCText, goldText, starText;
 
         public bool inLevel, inMap, levelEnded, goldAdded, starsAdded, isMapActive = true, isTutorial, isPaused;
         public List<bool> itemUnlocks = new List<bool>();
@@ -314,6 +314,9 @@ namespace PuppetJump.Objs
             StopCoroutine("LevelStart");
             isMapActive = true;
             OpenMap();
+            map.mapType = 4;
+            goldText.text = "Gold Gained:" + "\n" + goldAdded;
+            starText.text = "Stars Gained:" + "\n" + starsAdded;
             Debug.Log("Running the End of Level checks!");
             inLevel = false;
             if (goldAdded == false)
