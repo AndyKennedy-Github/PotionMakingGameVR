@@ -49,7 +49,7 @@ namespace PuppetJump.Objs
             }
             else if (beingServed && !potionObtained)
             {
-                agent.destination = new Vector3(.4f, transform.position.y, -4.2f);//windowSpot.position;
+                agent.destination = new Vector3(.0f, transform.position.y, -3.0f);//windowSpot.position;
                 Debug.Log("I'm moving to the window!");
                 //Move to new spot and stay there. Probs passing through a trigger
                 //that shows what thing they want on the screen
