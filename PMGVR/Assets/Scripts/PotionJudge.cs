@@ -19,6 +19,7 @@ namespace PuppetJump.Objs
         {
             if (other.CompareTag("Bottle"))
             {
+                
                 if (npcgm.GetWaitingNPC().GetNPCPotion().ToString() == other.GetComponent<Bottle>().GetPotionInBottleName().ToString())
                 {
                     Debug.Log("That was the right potion!");
@@ -33,8 +34,16 @@ namespace PuppetJump.Objs
                     Debug.Log(other.GetComponent<Bottle>().GetPotionInBottleName().ToString());
                     npcgm.GetWaitingNPC().NPCServed(false);
                 }
-                //Destroy(other.gameObject);
+                
+                StartCoroutine(DestroyAfterTime(other.gameObject));
             }
+        }
+
+        IEnumerator DestroyAfterTime(GameObject g)
+        {
+            yield return new WaitForSeconds(2);
+            Destroy(g);
+            StopCoroutine("DestroyAfterTime");
         }
     }
 }
