@@ -13,7 +13,7 @@ namespace PuppetJump.Objs
         public bool isTouchable = true;                         // can the object currently be touched
         //[ReadOnly]
         public bool isTouched = false;                          // is the object currently being touched
-        [ReadOnly]
+        //[ReadOnly]
         public bool wasTouched = false;                         // a check if the object was previously declared touched or not, prevents constant touching events
         [ReadOnly]
         public PuppetHand puppetHandTouching;                   // used to a reference to the PuppetHand that is touching the object        

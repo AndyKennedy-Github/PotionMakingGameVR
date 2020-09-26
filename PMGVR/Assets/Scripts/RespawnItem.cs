@@ -18,7 +18,7 @@ namespace PuppetJump.Objs
             if (other.CompareTag(itemTag))
             {
                 grabbed = other.transform.GetComponent<Grabbable>();
-                respawnCube = new Vector3(Random.Range(transform.position.x - .2f, transform.position.x + .2f), transform.position.y, Random.Range(transform.position.z - .2f, transform.position.z + .2f));
+                respawnCube = new Vector3(Random.Range(transform.position.x - .15f, transform.position.x + .15f), transform.position.y, Random.Range(transform.position.z - .15f, transform.position.z + .15f));
                 StartCoroutine(ReplaceItem(other.gameObject));
                 other.transform.GetComponent<Ingredient>().isInBox = false;
             }
