@@ -46,6 +46,7 @@ namespace PuppetJump.Objs
             pm = FindObjectOfType<PotionManager>();
             inLevel = false;
             isMapActive = true;
+            map.mapType = 0;
         }
 
         void Update()
@@ -63,7 +64,7 @@ namespace PuppetJump.Objs
                 }
             }
 
-            if (t.timeInRound <= 0)
+            if (t.timeInRound <= 0 && inLevel)
             {
                 StartCoroutine(EndOfLevel());
             }
@@ -314,9 +315,6 @@ namespace PuppetJump.Objs
             StopCoroutine("LevelStart");
             isMapActive = true;
             OpenMap();
-            map.mapType = 4;
-            goldText.text = "Gold Gained:" + "\n" + goldAdded;
-            starText.text = "Stars Gained:" + "\n" + starsAdded;
             Debug.Log("Running the End of Level checks!");
             inLevel = false;
             if (goldAdded == false)
@@ -334,6 +332,9 @@ namespace PuppetJump.Objs
             {
                 lm.levels[level].goldHighScore = levelGold;
             }
+            map.mapType = 4;
+            goldText.text = "Gold Gained:" + "\n" + levelGold;
+            starText.text = "Stars Gained:" + "\n" + levelStars;
             ResetLevelGoldandStars();
             SaveGame();
             levelEnded = true;

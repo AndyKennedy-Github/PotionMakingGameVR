@@ -122,6 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8515278309562306975}
+  - component: {fileID: 2088658092202120962}
   m_Layer: 0
   m_Name: juicerBody
   m_TagString: Untagged
@@ -138,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 2948502885183299257}
   m_LocalRotation: {x: -0.6993497, y: -0.10445122, z: -0.10445125, w: 0.6993496}
   m_LocalPosition: {x: 0.012067556, y: 0, z: -0.016506437}
-  m_LocalScale: {x: 100, y: 100, z: 100.000015}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 2508654199405511380}
   - {fileID: 2213878500470158452}
@@ -146,6 +147,20 @@ Transform:
   m_Father: {fileID: 4380307214047131247}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2088658092202120962
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2948502885183299257}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.001
+  m_Height: 0.05
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5707442048108302073
 GameObject:
   m_ObjectHideFlags: 0

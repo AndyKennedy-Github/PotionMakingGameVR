@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PuppetJump.Objs
 {
@@ -10,6 +11,7 @@ namespace PuppetJump.Objs
         public float timeInRound = 120;
         public bool startTime;
         private GameManager gm;
+        public Text timeText;
 
         // Start is called before the first frame update
         void Awake()
@@ -36,6 +38,7 @@ namespace PuppetJump.Objs
             if (startTime)
             {
                 timeInRound -= Time.deltaTime;
+                DisplayTime(timeInRound);
                 if (timeInRound <= 0)
                 {
                     Debug.Log("Time's up!");
@@ -43,6 +46,14 @@ namespace PuppetJump.Objs
                     startTime = false;
                 }
             }
+        }
+
+        void DisplayTime(float timeToDisplay)
+        {
+            float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+            float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+            timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
     }
 }
