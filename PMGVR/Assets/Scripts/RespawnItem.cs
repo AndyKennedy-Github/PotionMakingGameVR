@@ -20,7 +20,14 @@ namespace PuppetJump.Objs
                 grabbed = other.transform.GetComponent<Grabbable>();
                 respawnCube = new Vector3(Random.Range(transform.position.x - .15f, transform.position.x + .15f), transform.position.y, Random.Range(transform.position.z - .15f, transform.position.z + .15f));
                 StartCoroutine(ReplaceItem(other.gameObject));
-                other.transform.GetComponent<Ingredient>().isInBox = false;
+                if(other.transform.GetComponent<Ingredient>() != null)
+                {
+                    other.transform.GetComponent<Ingredient>().isInBox = false;
+                }
+                if (other.transform.GetComponent<SelfDestruct>() != null)
+                {
+                    other.transform.GetComponent<SelfDestruct>().isInBox = false;
+                }
             }
         }
 
