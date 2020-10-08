@@ -187,16 +187,15 @@ namespace PuppetJump.Objs
 
         private void OnTriggerEnter(Collider other)
         {
-            /*if (other.tag == "Ingredient" && isHot)
+            if (other.tag == "Ingredient" && isHot)
             {
                 AddIngredientToPotion(other.gameObject);
                 Destroy(other.gameObject);
             }
             else if (other.tag == "Ingredient" && !isHot)
             {
-                //animation stuff
-                //floating ingredients
-            }*/
+                Destroy(other.gameObject);
+            }
 
             if (other.tag == "Bottle")
             {
@@ -213,11 +212,13 @@ namespace PuppetJump.Objs
 
         private void OnTriggerStay(Collider other)
         {
+            /*
             if (other.tag == "Ingredient" && isHot)
             {
                 AddIngredientToPotion(other.gameObject);
                 Destroy(other.gameObject);
             }
+            */
         }
     }
 }

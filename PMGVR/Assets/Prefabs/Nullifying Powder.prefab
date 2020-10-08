@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 39844807759906727}
   - component: {fileID: -145376413099534017}
   - component: {fileID: 5641852954555775746}
+  - component: {fileID: 3538496341402518580}
   m_Layer: 0
   m_Name: Nullifying Powder
   m_TagString: Nullifying Powder
@@ -152,3 +153,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 2f5e3d3462b9fba43a427722efd79127, type: 3}
+--- !u!114 &3538496341402518580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006488476975309873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f71b847e1d64dc4486a633530a29c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInBox: 1
