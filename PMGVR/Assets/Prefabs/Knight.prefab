@@ -141,6 +141,7 @@ MonoBehaviour:
   windowSpot: {fileID: 758032021185895316, guid: a413f4542e8b1b04f8afbae3f7c31305,
     type: 3}
   endSpot: {fileID: 5823593475708988134, guid: ee8296b63d1993a43877b470c451e3e4, type: 3}
+  speed: 1
 --- !u!54 &8719986087633730136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,7 +154,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -177,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 8176101740104451705, guid: dcf2db7adcc47e94c855b036cbf45d41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8619657
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8176101740104451705, guid: dcf2db7adcc47e94c855b036cbf45d41,
         type: 3}

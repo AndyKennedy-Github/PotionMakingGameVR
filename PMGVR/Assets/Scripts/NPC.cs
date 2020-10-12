@@ -14,6 +14,8 @@ namespace PuppetJump.Objs
         Potion myPotion;
         public Transform windowSpot, endSpot;
         NavMeshAgent agent;
+        // Angular speed in radians per sec.
+        public float speed = 1.5f;
 
         Color wantedColor = Color.Null;
 
@@ -23,6 +25,7 @@ namespace PuppetJump.Objs
         void Start()
         {
             myPotion = GetComponent<Potion>();
+            windowSpot = GameObject.Find("WindowSpot").transform;
             beingServed = false;
             potionObtained = false;
             npcgm = FindObjectOfType<NPCManager>();
@@ -37,6 +40,9 @@ namespace PuppetJump.Objs
         // Update is called once per frame
         void Update()
         {
+            float singleStep = speed * Time.deltaTime;
+            Vector3 target = new Vector3(transform.rotation.x, 0, transform.rotation.z);
+            
             if (npcgm.npcs[0] == this || npcgm.npcs[FindPreviousNPC()].potionObtained)
             {
                 beingServed = true;
@@ -44,12 +50,18 @@ namespace PuppetJump.Objs
             if (!beingServed && !potionObtained)
             {
                 agent.destination = new Vector3(npcgm.npcs[FindPreviousNPC()].transform.position.x, npcgm.npcs[FindPreviousNPC()].transform.position.y, npcgm.npcs[FindPreviousNPC()].transform.position.z - 2.0f);
+                //transform.Rotate(transform.rotation.x, 0, transform.rotation.z);
+                //transform.rotation = Quaternion.LookRotation(newDirection);
+                //transform.LookAt(windowSpot);
                 Debug.Log(FindPreviousNPC());
                 //Have the character stand in a spot and stay there.
             }
             else if (beingServed && !potionObtained)
             {
-                agent.destination = new Vector3(.0f, transform.position.y, -3.0f);//windowSpot.position;
+                agent.destination = new Vector3(.0f, transform.position.y, -3.0f);
+                //transform.Rotate(transform.rotation.x, 0, transform.rotation.z);
+                //transform.rotation = Quaternion.LookRotation(newDirection);
+                transform.LookAt(windowSpot);
                 Debug.Log("I'm moving to the window!");
                 //Move to new spot and stay there. Probs passing through a trigger
                 //that shows what thing they want on the screen
@@ -60,6 +72,17 @@ namespace PuppetJump.Objs
                 beingServed = false;
                 //Moves off screen (probs around carriage) and then despawning
                 //Also transfers beingserved to next character in line
+            }
+            if (!agent.pathPending)
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        //transform.LookAt(windowSpot);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(target), singleStep);
+                    }
+                }
             }
 
             DestroyNPC();
