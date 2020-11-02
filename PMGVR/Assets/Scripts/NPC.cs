@@ -12,8 +12,11 @@ namespace PuppetJump.Objs
         GameManager gm;
         NPCManager npcgm;
         Potion myPotion;
+        public Animator knightAnim;
         public Transform windowSpot, endSpot;
         NavMeshAgent agent;
+        // Angular speed in radians per sec.
+        public float speed = 1.5f;
 
         Color wantedColor = Color.Null;
 
@@ -23,6 +26,8 @@ namespace PuppetJump.Objs
         void Start()
         {
             myPotion = GetComponent<Potion>();
+            knightAnim = GetComponentInChildren<Animator>();
+            windowSpot = GameObject.Find("WindowSpot").transform;
             beingServed = false;
             potionObtained = false;
             npcgm = FindObjectOfType<NPCManager>();
@@ -37,32 +42,72 @@ namespace PuppetJump.Objs
         // Update is called once per frame
         void Update()
         {
+            float singleStep = speed * Time.deltaTime;
+            Vector3 target = new Vector3(transform.rotation.x, 0, transform.rotation.z);
+            Vector3 boundary = new Vector3(transform.rotation.x, 355, transform.rotation.z);
+            
+
             if (npcgm.npcs[0] == this || npcgm.npcs[FindPreviousNPC()].potionObtained)
             {
                 beingServed = true;
             }
             if (!beingServed && !potionObtained)
             {
-                agent.destination = new Vector3(npcgm.npcs[FindPreviousNPC()].transform.position.x, npcgm.npcs[FindPreviousNPC()].transform.position.y, npcgm.npcs[FindPreviousNPC()].transform.position.z - 2.0f);
-                Debug.Log(FindPreviousNPC());
+                StartCoroutine("MoveToSpot");
+                knightAnim.SetBool("Moving", true);
                 //Have the character stand in a spot and stay there.
             }
             else if (beingServed && !potionObtained)
             {
-                agent.destination = new Vector3(.0f, transform.position.y, -3.0f);//windowSpot.position;
-                Debug.Log("I'm moving to the window!");
+                StartCoroutine("MoveToWindow");
+                knightAnim.SetBool("Moving", true);
                 //Move to new spot and stay there. Probs passing through a trigger
                 //that shows what thing they want on the screen
             }
             else if (potionObtained)
             {
-                agent.destination = endSpot.position;
-                beingServed = false;
+                StartCoroutine("GrabAndGo");
+                knightAnim.SetBool("Moving", true);
                 //Moves off screen (probs around carriage) and then despawning
                 //Also transfers beingserved to next character in line
             }
+            if (!agent.pathPending)
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(target), singleStep);
+                        knightAnim.SetBool("Moving", false);
+                    }
+                }
+            }
 
             DestroyNPC();
+        }
+
+        IEnumerator MoveToSpot()
+        {
+            yield return new WaitForSeconds(2);
+            agent.destination = new Vector3(npcgm.npcs[FindPreviousNPC()].transform.position.x, npcgm.npcs[FindPreviousNPC()].transform.position.y, npcgm.npcs[FindPreviousNPC()].transform.position.z - 2.0f);
+            //yield return null;
+        }
+
+        IEnumerator MoveToWindow()
+        {
+            StopCoroutine("MoveToSpot");
+            yield return new WaitForSeconds(2);
+            agent.destination = new Vector3(.0f, transform.position.y, -3.0f);
+        }
+
+        IEnumerator GrabAndGo()
+        {
+            StopCoroutine("MoveToWindow");
+            knightAnim.SetTrigger("Grab");
+            yield return new WaitForSeconds(1f);
+            agent.destination = endSpot.position;
+            beingServed = false;
         }
 
         int FindPreviousNPC()

@@ -19,7 +19,6 @@ namespace PuppetJump.Objs
         {
             if (other.CompareTag("Bottle"))
             {
-                
                 if (npcgm.GetWaitingNPC().GetNPCPotion().ToString() == other.GetComponent<Bottle>().GetPotionInBottleName().ToString())
                 {
                     Debug.Log("That was the right potion!");
